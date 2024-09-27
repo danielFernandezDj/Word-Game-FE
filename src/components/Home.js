@@ -6,6 +6,9 @@ import WordlePanel from "./homePanels/WordlePanel";
 import SpellingPanel from "./homePanels/SpellingPanel";
 
 function Home() {
+
+
+
   // State to store the current panel component
   const [panelComponent, setPanelComponent] = useState(<WordlePanel />)
 
@@ -24,45 +27,39 @@ function Home() {
       <p className="mb-8">Challenge yourself with our exciting word games!</p>
 
       {/* PLANETS */}
-      <div className="
-        space-x-4 mb-4
-        flex flex-row flex-wrap justify-center
+      <div className="mb-4
+        flex flex-wrap justify-center
         border-dashed border-2 border-rose-600
       ">
         {/* WORD-LE BTN */}
-        <div className=' basis-1/4 flex flex-col justify-center m-4'>
+        <div className=' basis-1/4 m-6 flex flex-col justify-center
+            hover:scale-125
+            transition-transform duration-300'
+          onClick={handleWordleCLick}
+        >
           <img src="https://fakeimg.pl/200x200" alt="Wordle Planet" />
-          <Link
-            onClick={handleWordleCLick}
-            // to="/wordle"
-            className="m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Wordle
-          </Link>
+          <h2>Wordle</h2>
         </div>
 
         {/* SPELLING BTN */}
-        <div className='basis-1/4 flex flex-col justify-center m-4' >
+        <div className='basis-1/4 m-6 flex flex-col justify-center
+            hover:scale-125
+            transition-transform duration-300'
+          onClick={handleSpellingClick}
+        >
           <img src="https://fakeimg.pl/200x200" alt="Spelling-Bee Planet" />
-          <Link
-            onClick={handleSpellingClick}
-            // to="/spelling-bee"
-            className="m-2 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Spelling
-          </Link>
+          <h2>Spelling</h2>
         </div>
 
       </div>
 
       {/* Panel ********************* */}
-      <div className="mb-2 border-dashed border-2 border-blue-600">
+      <div className="
+        flex flex-row justify-center
+        mb-2 border-dashed border-2 border-blue-600"
+      >
         <div>
-          <h3>How to PLay</h3>
-        </div>
-
-        <div>
-          <h3>Information about how to play the game goes here!</h3>
+          <h2 className='text-3xl font-bold mb-4'>How to PLay</h2>
         </div>
       </div>
 

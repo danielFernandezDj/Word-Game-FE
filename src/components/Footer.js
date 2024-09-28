@@ -23,8 +23,8 @@ function App() {
   return (
     <UserProvider value={{ user, handleLoginSuccess, handleLogout }}>
       <Router>
-        {/* Outer container to manage the layout */}
-        <div className="min-h-screen flex flex-col bg-gray-100">
+        <div className="min-h-screen bg-gray-100 flex flex-col">
+          {/* Navigation Bar */}
           <nav className="bg-white shadow-lg">
             <div className="max-w-6xl mx-auto px-4">
               <div className="flex justify-between">
@@ -56,7 +56,7 @@ function App() {
             </div>
           </nav>
 
-          {/* Content container with flex-grow to push the footer down */}
+          {/* Main Content */}
           <div className="flex-grow max-w-6xl mx-auto mt-8 px-4">
             <Routes>
               <Route path="/" element={<Home />} />
@@ -69,8 +69,8 @@ function App() {
             </Routes>
           </div>
 
-          {/* Sticky footer */}
-          <footer className="bg-white shadow-lg py-4">
+          {/* Footer */}
+          <footer className="bg-white shadow-lg py-4 mt-auto">
             <div className="max-w-6xl mx-auto px-4 text-center text-gray-500">
               <p>&copy; {new Date().getFullYear()} Word Games. All rights reserved.</p>
               <p>

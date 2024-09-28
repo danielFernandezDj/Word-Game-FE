@@ -11,7 +11,7 @@ export default function WordlePanel() {
           </h2>
         </div>
         <Link to="/wordle" className="m-2 bg-yellow-500 text-white font-bold py-2 px-4 rounded">
-          Play!
+          Play
         </Link>
       </div>
 

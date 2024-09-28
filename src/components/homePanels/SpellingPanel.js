@@ -6,7 +6,7 @@ export default function SpellingPanel() {
     <div className="border-none border-2 border-indigo-600">
       <div className="flex flex-wrap justify-center content-center space-x-8">
         <div className="flex flex-wrap justify-center content-center ">
-          <h2>
+          <h2 className="text-lg font-bold">
             Spelling-Bee Manual!
           </h2>
         </div>
@@ -24,7 +24,7 @@ export default function SpellingPanel() {
 
         <br />
 
-        <h2>How to Play</h2>
+        <h2 className="text-lg font-bold">How to Play</h2>
         <h3 className="text-justify m-auto max-w-xl">
           Spelling Bee is a word challenge game where the goal is to correctly
           spell a word based on its definition. Here's how it works:

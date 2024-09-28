@@ -6,8 +6,8 @@ export default function WordlePanel() {
     <div className="border-none border-2 border-indigo-600">
       <div className="flex flex-wrap justify-center content-center space-x-8">
         <div className="flex flex-wrap justify-center content-center ">
-          <h2>
-            Word-Le Manual!
+          <h2 className="text-lg font-bold">
+            Word-Le Manual:
           </h2>
         </div>
         <Link to="/wordle" className="m-2 bg-yellow-500 text-white font-bold py-2 px-4 rounded">
@@ -24,7 +24,7 @@ export default function WordlePanel() {
 
         <br />
 
-        <h2>How to Play</h2>
+        <h2 className="text-lg font-bold">How to Play</h2>
         <h3 className="text-justify m-auto max-w-xl">
           Wordle is a word puzzle game where the objective is to
           guess a five-letter word within six tries. Here’s how it works:

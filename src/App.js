@@ -6,6 +6,7 @@ import SignUp from './components/SignUp';
 import Profile from './components/Profile';
 import Wordle from './components/Wordle';
 import SpellingBee from './components/SpellingBee';
+import Sudoku from './components/Sudoku';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
                   <Link to="/" className="py-4 px-2 text-gray-500 hover:text-green-500 transition duration-300">Home</Link>
                   <Link to="/wordle" className="py-4 px-2 text-gray-500 hover:text-green-500 transition duration-300">Wordle</Link>
                   <Link to="/spelling-bee" className="py-4 px-2 text-gray-500 hover:text-green-500 transition duration-300">Spelling Bee</Link>
+                  <Link to="/sudoku" className="py-4 px-2 text-gray-500 hover:text-green-500 transition duration-300">Sudoku</Link>
                 </div>
               </div>
               <div className="hidden md:flex items-center space-x-3">
@@ -40,6 +42,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/wordle" element={<Wordle />} />
             <Route path="/spelling-bee" element={<SpellingBee />} />
+            <Route path="/sudoku" element={<Sudoku />} />
           </Routes>
         </div>
       </div>

@@ -22,7 +22,7 @@ function Home() {
   }
 
   return (
- working-in-home-page
+ 
     <div className="text-center mt-8">
       <h1 className="text-5xl font-bold">Welcome to Word Games</h1>
       <p className="text-2 mb-2">Challenge yourself with our exciting word games!</p>

@@ -61,7 +61,7 @@ function App() {
           </nav>
 
                   {/* Content container with flex-grow to push the footer down */}
-          <div className="flex-grom max-w-6xl mx-auto mt-8 px-4">
+          <div className="flex-grow max-w-6xl mx-auto mt-8 px-4">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />

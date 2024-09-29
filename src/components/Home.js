@@ -24,8 +24,15 @@ function Home() {
   return (
 
     <div className="text-center mt-8">
-      <h1 className="text-5xl font-bold">Welcome to Word Games</h1>
-      <p className="text-2 mb-2">Challenge yourself with our exciting word games!</p>
+      <h1 className="text-6xl font-bold">
+        <span className="text-zinc-800"> Welcome to </span>
+        <span className="text-orange-500"> Word </span>
+        <span className='text-green-500'> Games… </span>
+      </h1>
+      <p className="text-lg text-zinc-800 m-2">
+        Challenge yourself with our exciting word games!
+      </p>
+      <hr />
 
       {/* PLANETS */}
       <div className="flex flex-wrap justify-center">
@@ -77,7 +84,7 @@ function Home() {
       {/* Panels Components displayed here! */}
       <div className="my-8">
         {panelComponent}
-        
+
       </div>
     </div>
   );

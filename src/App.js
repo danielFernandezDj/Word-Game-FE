@@ -31,7 +31,10 @@ function App() {
               <div className="flex justify-between">
                 <div className="flex space-x-7">
                   <div className="flex items-center py-4 px-2">
-                    <Link to="/" className="font-semibold text-gray-500 text-lg">Word Games</Link>
+                    <Link to="/" className="font-bold text-xl">
+                      <span className="text-orange-500 tracking-widest"> Word </span>
+                      <span className='text-green-500 tracking-widest'> Games… </span>
+                    </Link>
                   </div>
                   <div className="hidden md:flex items-center space-x-1">
                     <Link to="/" className="py-4 px-2 text-gray-500 hover:text-green-500 transition duration-300">Home</Link>

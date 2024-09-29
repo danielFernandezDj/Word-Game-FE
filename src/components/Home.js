@@ -25,7 +25,7 @@ function Home() {
 
     <div className="text-center mt-8">
       <h1 className="text-6xl font-bold">
-        <span className="text-zinc-800"> Welcome to </span>
+        <span className="text-zinc-900"> Welcome to </span>
         <span className="text-orange-500"> Word </span>
         <span className='text-green-500'> Games… </span>
       </h1>
@@ -38,43 +38,43 @@ function Home() {
       <div className="flex flex-wrap justify-center">
 
         {/* WORD-LE ---------------------- */}
-        <div className=' basis-1/4 m-6 flex flex-col justify-center
-            hover:scale-125
+        <div className=' basis-1/3 m-6 flex flex-col justify-center
+            hover:scale-110
             transition-transform duration-300'
           onClick={handleWordleCLick}
         >
           <img src="/images/planets/planet-1.png" alt="Wordle Planet"
             className="hover:drop-shadow-2xl"
           />
-          <h2 className="text-3xl font-bold">
-            WordLe
+          <h2 className="text-3xl font-bold text-zinc-900">
+            Wordle
           </h2>
         </div>
 
         {/* SPELLING ---------------------- */}
         <div className='basis-1/4 m-6 flex flex-col justify-center
-            hover:scale-125
+            hover:scale-110
             transition-transform duration-300'
           onClick={handleSpellingClick}
         >
           <img src="/images/planets/planet-2.png" alt="Spelling-Bee Planet"
             className=" hover:drop-shadow-2xl"
           />
-          <h2 className="text-3xl font-bold">
+          <h2 className="text-3xl font-bold text-zinc-900">
             Spelling
           </h2>
         </div>
 
         {/* SUDOKU ---------------------- */}
-        <div className='basis-1/4 m-6 flex flex-col justify-center
-            hover:scale-125
+        <div className='basis-1/5 m-6 flex flex-col justify-center
+            hover:scale-110
             transition-transform duration-300'
           onClick={handleSudokuClick}
         >
           <img src="/images/planets/planet-3.png" alt="Sudoku Planet"
             className=" hover:drop-shadow-2xl"
           />
-          <h2 className="text-3xl font-bold">
+          <h2 className="text-3xl font-bold text-zinc-900">
             Sudoku
           </h2>
         </div>

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 export default function WordlePanel() {
   return (
     <div className="border-none rounded-xl border-2 border-indigo-600
-      m-auto max-w-2xl p-8 bg-white
+        m-auto max-w-2xl p-8 bg-white
     ">
-      <div className="flex flex-wrap justify-center content-center space-x-8 mb-4
-        bg-zinc-100 rounded-lg
+      <div className="flex flex-wrap justify-center content-center space-x-8
+        mb-4 bg-zinc-100 rounded-lg
       ">
         <div className="flex flex-wrap justify-center content-center ">
           <h2 className="text-xl font-bold hover:text-orange-600">
@@ -18,7 +18,7 @@ export default function WordlePanel() {
           className="
             tracking-widest m-2 bg-yellow-500 text-white font-bold py-2 px-4 rounded
             hover:drop-shadow-lg hover:scale-110 hover:bg-green-500
-            transition-transform duration-300 '
+            transition-transform duration-300
         ">
           Play
         </Link>

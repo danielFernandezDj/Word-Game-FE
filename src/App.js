@@ -25,6 +25,7 @@ function App() {
       <Router>
         {/* Outer container to manage the layout */}
         <div className="min-h-screen flex flex-col bg-gray-100">
+          {/* TOP VAR */}
           <nav className="bg-white shadow-lg">
             <div className="max-w-6xl mx-auto px-4">
               <div className="flex justify-between">

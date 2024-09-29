@@ -23,8 +23,7 @@ function App() {
   return (
     <UserProvider value={{ user, handleLoginSuccess, handleLogout }}>
       <Router>
-        {/* Outer container to manage the layout */}
-        <div className="min-h-screen flex flex-col bg-gray-100">
+        <div className="min-h-screen bg-gray-100">
           <nav className="bg-white shadow-lg">
             <div className="max-w-6xl mx-auto px-4">
               <div className="flex justify-between">
@@ -56,8 +55,7 @@ function App() {
             </div>
           </nav>
 
-          {/* Content container with flex-grow to push the footer down */}
-          <div className="flex-grow max-w-6xl mx-auto mt-8 px-4">
+          <div className="max-w-6xl mx-auto mt-8 px-4">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
@@ -68,19 +66,6 @@ function App() {
               <Route path="/sudoku" element={<Sudoku />} />
             </Routes>
           </div>
-
-          {/* Sticky footer */}
-          <footer className="bg-white shadow-lg py-4">
-            <div className="max-w-6xl mx-auto px-4 text-center text-gray-500">
-              <p>&copy; {new Date().getFullYear()} Word Games. All rights reserved.</p>
-              <p>
-                <Link to="/" className="hover:text-green-500 transition duration-300">Home</Link> |
-                <Link to="/wordle" className="hover:text-green-500 transition duration-300 mx-2">Wordle</Link> |
-                <Link to="/spelling-bee" className="hover:text-green-500 transition duration-300 mx-2">Spelling Bee</Link> |
-                <Link to="/sudoku" className="hover:text-green-500 transition duration-300">Sudoku</Link>
-              </p>
-            </div>
-          </footer>
         </div>
       </Router>
     </UserProvider>

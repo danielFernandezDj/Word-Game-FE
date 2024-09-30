@@ -164,47 +164,108 @@ function SpellingBee() {
   }
 
   return (
-    <div>
-      <h1>Spelling Bee Game</h1>
-      <p>Definition: {definition}</p>
-      <div style={{ marginBottom: '10px' }}>
-        <button style={buttonStyle} onClick={() => playAudio(word)}>Play Word</button>
-        <button style={buttonStyle} onClick={() => playAudio(definition)}>Play Definition</button>
-      </div>
-      <form onSubmit={handleGuess}>
-        <input
-          type="text"
-          value={guess}
-          onChange={(e) => setGuess(e.target.value)}
-          placeholder="Enter your guess"
-          style={{ marginBottom: '10px' }}
-        />
+    <div className="border-solid rounded-xl border-2 border-indigo-400 border-dotted
+      m-auto max-w-2xl p-8 my-8 flex flex-col
+    ">
+      <div className="border-solid rounded-xl border-2 border-indigo-400 border-dotted
+        p-8 bg-white
+      ">
+        <h1 className="font-bold text-4xl"> Spelling Bee Game </h1>
+        <p>
+          <strong>Definition:</strong>
+          <span className="text-justify m-auto max-w-xl leading-relaxed indent-4">{definition}</span>
+        </p>
+
         <div style={{ marginBottom: '10px' }}>
-          <button style={buttonStyle} type="submit">Submit Guess</button>
-          <button style={skipButtonStyle} onClick={handleSkip}>Skip</button>
-          <button style={revealButtonStyle} onClick={handleRevealAnswer}>Reveal Answer</button>
-          {isAnswerRevealed && <button style={revealButtonStyle} onClick={handleNextWord}>Next Word</button>}
+          <button style={buttonStyle} onClick={() => playAudio(word)}>Play Word</button>
+          <button style={buttonStyle} onClick={() => playAudio(definition)}>Play Definition</button>
         </div>
-      </form>
-      <p>{feedback}</p>
-      <div>
-        Hearts: {hearts.map((heart, index) => (
-          <span key={index}>{heart}</span>
-        ))}
+
+        <form onSubmit={handleGuess}>
+          <input
+            type="text"
+            value={guess}
+            onChange={(e) => setGuess(e.target.value)}
+            placeholder="Enter your guess"
+            style={{ marginBottom: '10px' }}
+          />
+          <div style={{ marginBottom: '10px' }}>
+            <button style={buttonStyle} type="submit">Submit Guess</button>
+            <button style={skipButtonStyle} onClick={handleSkip}>Skip</button>
+            <button style={revealButtonStyle} onClick={handleRevealAnswer}>Reveal Answer</button>
+            {isAnswerRevealed && <button style={revealButtonStyle} onClick={handleNextWord}>Next Word</button>}
+          </div>
+        </form>
+
+        <p>{feedback}</p>
+
+        <div>
+          Hearts: {hearts.map((heart, index) => (
+            <span key={index}>{heart}</span>
+          ))}
+        </div>
+
+        <p>Correct Guesses: {correctGuesses}</p>
+        {isGameOver && <button style={buttonStyle} onClick={handleNewGame}>New Game</button>}
       </div>
-      <p>Correct Guesses: {correctGuesses}</p>
-      {isGameOver && <button style={buttonStyle} onClick={handleNewGame}>New Game</button>}
-      <button style={buttonStyle} onClick={toggleInstructions}>
+
+      {/* <br /> <hr /> <br /> */}
+
+      <button onClick={toggleInstructions} className="mt-8 mb-4 text-2xl font-bold text-indigo-400">
         {showInstructions ? 'Hide Instructions' : 'Show Instructions'}
       </button>
+
       {showInstructions && (
-        <div>
-          <h2>Instructions:</h2>
-          <p>1. Listen to the word and read its definition.</p>
-          <p>2. Type your guess for the word in the input field.</p>
-          <p>3. Click 'Submit Guess' to check your answer.</p>
-          <p>4. You have 5 hearts. Each incorrect guess loses a heart.</p>
-          <p>5. Try to guess 10 words correctly to win!</p>
+        <div className="border-solid rounded-xl border-2 border-indigo-400
+          m-auto max-w-2xl p-8 bg-white
+        ">
+
+          <div className="flex flex-col justify-center">
+            <h3 className="text-justify m-auto max-w-xl leading-relaxed indent-4">
+              Welcome to Spelling Bee, an exciting and educational game where you test
+              your spelling skills by guessing the correct word based on its definition.
+              Here’s a quick guide on how to play:
+            </h3>
+
+            <br /> <hr />
+
+            <h2 className="text-lg font-bold bg-zinc-100 rounded-lg my-4 py-2
+              hover:text-orange-600 text-center
+            ">
+              How to Play
+            </h2>
+            <h3 className="text-justify m-auto max-w-xl leading-relaxed indent-4">
+              Spelling Bee is a word challenge game where the goal is to correctly
+              spell a word based on its definition. Here's how it works:
+            </h3>
+
+            <br />
+
+            <div className="text-justify m-auto max-w-xl leading-relaxed">
+              <p className=" my-2 "><strong className="text-orange-600">1- Starting a Game:</strong> Each round begins by listening to the word and reading its definition.</p>
+
+              <hr />
+
+              <p className=" my-2 "><strong className="text-orange-600">2- Entering Your Guess:</strong> Type your guess for the word in the input field.</p>
+
+              <hr />
+
+              <p className=" my-2 "><strong className="text-orange-600">3- Feedback:</strong></p>
+              <p className="indent-4">
+                <strong className="text-green-600">* Correct Guess:</strong> If you guess the word correctly, your score will increase, and you move to the next word.
+              </p>
+              <p className="indent-4">
+                <strong className="text-gray-500">* Incorrect Guess:</strong> If you guess wrong, you lose one of your 5 hearts.
+              </p>
+
+              <hr />
+
+              <p className=" my-2 "><strong className="text-orange-600">4- Winning: </strong> You win by guessing 10 words correctly before running out of hearts.
+                If you lose all 5 hearts, the game ends.
+              </p>
+            </div>
+          </div>
+
         </div>
       )}
     </div>

@@ -167,19 +167,31 @@ function SpellingBee() {
     <div className="border-solid rounded-xl border-2 border-indigo-400 border-dotted
       m-auto max-w-2xl p-8 my-8 flex flex-col
     ">
+
+      <h1 className="font-bold text-4xl"> Spelling Bee Game </h1>
+
+      <br /> <hr /> <br />
+
       <div className="border-solid rounded-xl border-2 border-indigo-400 border-dotted
         p-8 bg-white
-      ">
-        <h1 className="font-bold text-4xl"> Spelling Bee Game </h1>
+        ">
+        <div className="flex flex-row justify-between">
+          <div>
+            {/* Hearts:  */}
+            {hearts.map((heart, index) => (<span key={index}>{heart}</span>
+            ))}
+          </div>
+          <p>Correct {correctGuesses}</p>
+        </div>
+
+        <br /> <hr /> <br />
+
         <p>
-          <strong>Definition:</strong>
+          <strong>Definition : </strong>
           <span className="text-justify m-auto max-w-xl leading-relaxed indent-4">{definition}</span>
         </p>
 
-        <div style={{ marginBottom: '10px' }}>
-          <button style={buttonStyle} onClick={() => playAudio(word)}>Play Word</button>
-          <button style={buttonStyle} onClick={() => playAudio(definition)}>Play Definition</button>
-        </div>
+        <br />
 
         <form onSubmit={handleGuess}>
           <input
@@ -190,45 +202,36 @@ function SpellingBee() {
             style={{ marginBottom: '10px' }}
           />
           <div style={{ marginBottom: '10px' }}>
-            <button style={buttonStyle} type="submit">Submit Guess</button>
-            <button style={skipButtonStyle} onClick={handleSkip}>Skip</button>
             <button style={revealButtonStyle} onClick={handleRevealAnswer}>Reveal Answer</button>
+            <button style={buttonStyle} type="submit">Submit </button>
             {isAnswerRevealed && <button style={revealButtonStyle} onClick={handleNextWord}>Next Word</button>}
           </div>
         </form>
 
-        <p>{feedback}</p>
-
-        <div>
-          Hearts: {hearts.map((heart, index) => (
-            <span key={index}>{heart}</span>
-          ))}
+        <div style={{ marginBottom: '10px' }}>
+          <button style={buttonStyle} onClick={() => playAudio(word)}>Play Word</button>
+          <button style={skipButtonStyle} onClick={handleSkip}>Skip</button>
+          {/* <button style={buttonStyle} onClick={() => playAudio(definition)}>Play Definition</button> */}
         </div>
 
-        <p>Correct Guesses: {correctGuesses}</p>
+
+        <p>{feedback}</p>
+
         {isGameOver && <button style={buttonStyle} onClick={handleNewGame}>New Game</button>}
       </div>
 
       {/* <br /> <hr /> <br /> */}
 
-      <button onClick={toggleInstructions} className="mt-8 mb-4 text-2xl font-bold text-indigo-400">
+      <button onClick={toggleInstructions} className="m-4 text-2xl font-bold text-indigo-400">
         {showInstructions ? 'Hide Instructions' : 'Show Instructions'}
       </button>
 
       {showInstructions && (
-        <div className="border-solid rounded-xl border-2 border-indigo-400
+        <div className="border-solid rounded-xl border-2 border-indigo-400 border-dotted
           m-auto max-w-2xl p-8 bg-white
         ">
 
           <div className="flex flex-col justify-center">
-            <h3 className="text-justify m-auto max-w-xl leading-relaxed indent-4">
-              Welcome to Spelling Bee, an exciting and educational game where you test
-              your spelling skills by guessing the correct word based on its definition.
-              Here’s a quick guide on how to play:
-            </h3>
-
-            <br /> <hr />
-
             <h2 className="text-lg font-bold bg-zinc-100 rounded-lg my-4 py-2
               hover:text-orange-600 text-center
             ">

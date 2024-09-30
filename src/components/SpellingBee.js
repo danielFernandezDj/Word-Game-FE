@@ -139,9 +139,10 @@ function SpellingBee() {
   };
 
   const buttonStyle = {
-    backgroundColor: 'blue',
+    // backgroundColor: 'blue',
     color: 'white',
-    padding: '10px 15px',
+    padding: '12px 8px',
+    width: '100%',
     margin: '5px',
     border: 'none',
     borderRadius: '5px',
@@ -178,42 +179,42 @@ function SpellingBee() {
         <div className="flex flex-row justify-between">
           <div>
             {/* Hearts:  */}
-            {hearts.map((heart, index) => (<span key={index}>{heart}</span>
+            {hearts.map((heart, index) => (<span key={index} className="m-1">{heart}</span>
             ))}
           </div>
-          <p>Correct {correctGuesses}</p>
+          <p className="text-bold italic">
+            Correct : {correctGuesses}
+          </p>
         </div>
 
         <br /> <hr /> <br />
 
-        <p>
+        <p className="mb-4">
           <strong>Definition : </strong>
           <span className="text-justify m-auto max-w-xl leading-relaxed indent-4">{definition}</span>
         </p>
 
-        <br />
-
         <form onSubmit={handleGuess}>
-          <input
+          <input className="border-solid rounded-xl border-2 border-indigo-400 border-dotted mb-2 pl-4 py-2 w-full text-lg"
             type="text"
             value={guess}
             onChange={(e) => setGuess(e.target.value)}
-            placeholder="Enter your guess"
-            style={{ marginBottom: '10px' }}
+            placeholder="• Enter your guess."
           />
-          <div style={{ marginBottom: '10px' }}>
-            <button style={revealButtonStyle} onClick={handleRevealAnswer}>Reveal Answer</button>
-            <button style={buttonStyle} type="submit">Submit </button>
+
+          <div className="flex justify-between my-2 mb-4 tracking-wider text-bold">
+            <button className="bg-green-600" style={buttonStyle} type="submit">Submit </button>
+            <button className="bg-blue-600" style={buttonStyle} onClick={() => playAudio(word)}>Play Word</button>
+            <button style={skipButtonStyle} onClick={handleSkip}>Skip</button>
+            {/* <button style={buttonStyle} onClick={() => playAudio(definition)}>Play Definition</button> */}
+          </div>
+
+          <div>
+            <button className="rounded-lg w-full bg-yellow-400 tracking-wider py-2 text-bold" onClick={handleRevealAnswer}
+            > Reveal Answer</button>
             {isAnswerRevealed && <button style={revealButtonStyle} onClick={handleNextWord}>Next Word</button>}
           </div>
         </form>
-
-        <div style={{ marginBottom: '10px' }}>
-          <button style={buttonStyle} onClick={() => playAudio(word)}>Play Word</button>
-          <button style={skipButtonStyle} onClick={handleSkip}>Skip</button>
-          {/* <button style={buttonStyle} onClick={() => playAudio(definition)}>Play Definition</button> */}
-        </div>
-
 
         <p>{feedback}</p>
 

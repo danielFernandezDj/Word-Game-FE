@@ -141,11 +141,11 @@ function SpellingBee() {
   const buttonStyle = {
     // backgroundColor: 'blue',
     color: 'white',
-    padding: '12px 8px',
+    padding: '1rem 1rem',
     width: '100%',
     margin: '5px',
     border: 'none',
-    borderRadius: '5px',
+    borderRadius: '6px',
     cursor: 'pointer',
   };
 
@@ -210,9 +210,11 @@ function SpellingBee() {
           </div>
 
           <div>
-            <button className="rounded-lg w-full bg-yellow-400 tracking-wider py-2 text-bold" onClick={handleRevealAnswer}
-            > Reveal Answer</button>
-            {isAnswerRevealed && <button style={revealButtonStyle} onClick={handleNextWord}>Next Word</button>}
+            <button className="rounded-lg w-full bg-yellow-400 tracking-wider py-2 text-bold" onClick={handleRevealAnswer}>
+              Reveal Answer
+            </button>
+            {/* ----------------------------------- I at HERE! ----------------------------------- */}
+            {isAnswerRevealed && <button style={revealButtonStyle} onClick={handleNextWord}> Next Word </button>}
           </div>
         </form>
 

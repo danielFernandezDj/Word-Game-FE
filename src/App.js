@@ -75,7 +75,7 @@ function App() {
            {/* Sticky footer */}
           <footer className="bg-white shadow-lg py-4">
             <div className="max-w-6xl mx-auto px-4 text-center text-gray-500">
-              <p>&copy; {new Date().getFullYear()} Word Games. All rights reserved.</p>
+              <p>&copy; {new Date().getFullYear()} Word World. All rights reserved.</p>
               <p>
                 <Link to="/" className="hover:text-green-500 transition duration-300">Home</Link> |
                 <Link to="/wordle" className="hover:text-green-500 transition duration-300 mx-2">Wordle</Link> |

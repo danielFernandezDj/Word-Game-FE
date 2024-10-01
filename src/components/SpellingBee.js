@@ -8,6 +8,7 @@ function SpellingBee() {
 
   const [feedback, setFeedback] = useState('');
   const [beforeFeedback, setBeforeFeedback] = useState('');
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
   const [hearts, setHearts] = useState(['❤️', '❤️', '❤️', '❤️', '❤️']);
   const [correctGuesses, setCorrectGuesses] = useState(0);
@@ -98,6 +99,7 @@ function SpellingBee() {
         setIsAnswerRevealed(true);
         setFeedback(` ${word}`);
         setBeforeFeedback(`Correct word is :`)
+        setIsSubmitDisabled(true)
       }
     } else {
       setFeedback(`Incorrect. Try again!`);
@@ -118,7 +120,10 @@ function SpellingBee() {
       setIsGameOver(true);
       setFeedback(`Game Over! You've run out of hearts. You got ${correctGuesses} words correct.`);
     } else {
-      fetchNewWord();
+      setIsAnswerRevealed(true);
+      // setFeedback(` ${word}`);
+      // setBeforeFeedback(`Correct word is :`)
+      setIsSubmitDisabled(true)
     }
   };
 
@@ -128,6 +133,7 @@ function SpellingBee() {
     setCorrectGuesses(0);
     setIsGameOver(false);
     fetchNewWord();
+    setIsSubmitDisabled(false)
   };
 
   const toggleInstructions = (e) => {
@@ -138,6 +144,7 @@ function SpellingBee() {
   const handleRevealAnswer = (e) => {
     e.preventDefault();
     setIsAnswerRevealed(true);
+    setIsSubmitDisabled(true)
     setFeedback(` ${word}`);
     setBeforeFeedback(`Correct word is :`)
   };
@@ -145,6 +152,7 @@ function SpellingBee() {
   const handleNextWord = (e) => {
     e.preventDefault();
     fetchNewWord();
+    setIsSubmitDisabled(false)
   };
 
   const buttonStyle = {
@@ -209,9 +217,9 @@ function SpellingBee() {
           {/* ----------------------------------- I'm at HERE! ----------------------------------- */}
           {/* Need to Fix that the button "Play Word" is deleting one live each time, thats no right */}
           <div className="flex justify-between my-2 mb-4 tracking-wider text-bold">
-            <button className="bg-green-600" style={buttonStyle} type="submit"> Submit </button>
+            <button className="bg-green-600" style={buttonStyle} type="submit" disabled={isSubmitDisabled}> Submit </button>
             <button className="bg-blue-600" style={buttonStyle} type="button" onClick={() => playAudio(word)}>Play Word</button>
-            <button style={skipButtonStyle} onClick={handleSkip}>Skip</button>
+            <button style={skipButtonStyle} onClick={handleSkip} disabled={isSubmitDisabled}>Skip</button>
             {/* <button style={buttonStyle} onClick={() => playAudio(definition)}>Play Definition</button> */}
           </div>
 
@@ -226,13 +234,14 @@ function SpellingBee() {
                 <span className="text-red-500">{feedback}</span>
               </div>
               {/* hover:scale-110 */}
-              {isAnswerRevealed && <button onClick={handleNextWord}
-                className="bg-indigo-600 rounded-lg p-2 m-2 text-bold text-white
+              {isAnswerRevealed &&
+                <button onClick={handleNextWord}
+                  className="bg-indigo-600 rounded-lg p-2 m-2 text-bold text-white
                   hover:drop-shadow-lg  hover:bg-indigo-500
                   transition-transform duration-300
                 ">
-                Next Word
-              </button>}
+                  Next Word
+                </button>}
             </div>
           </div>
         </form>

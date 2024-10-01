@@ -5,7 +5,10 @@ function SpellingBee() {
   const [word, setWord] = useState('');
   const [definition, setDefinition] = useState('');
   const [guess, setGuess] = useState('');
+
   const [feedback, setFeedback] = useState('');
+  const [beforeFeedback, setBeforeFeedback] = useState('');
+
   const [hearts, setHearts] = useState(['❤️', '❤️', '❤️', '❤️', '❤️']);
   const [correctGuesses, setCorrectGuesses] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
@@ -43,7 +46,7 @@ function SpellingBee() {
   };
 
   const fetchNewWord = useCallback(async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     setIsAnswerRevealed(false);
     let validWordFound = false;
     while (!validWordFound) {
@@ -62,6 +65,7 @@ function SpellingBee() {
     }
     setGuess('');
     setFeedback('');
+    setBeforeFeedback('');
     setIsLoading(false);
   }, []);
 
@@ -89,7 +93,11 @@ function SpellingBee() {
         setIsGameOver(true);
         setFeedback("Congratulations! You've reached 10 correct guesses!");
       } else {
-        fetchNewWord();
+        // fetchNewWord();
+        playAudio(word)
+        setIsAnswerRevealed(true);
+        setFeedback(` ${word}`);
+        setBeforeFeedback(`Correct word is :`)
       }
     } else {
       setFeedback(`Incorrect. Try again!`);
@@ -130,7 +138,8 @@ function SpellingBee() {
   const handleRevealAnswer = (e) => {
     e.preventDefault();
     setIsAnswerRevealed(true);
-    setFeedback(`The correct word is: ${word}`);
+    setFeedback(` ${word}`);
+    setBeforeFeedback(`Correct word is :`)
   };
 
   const handleNextWord = (e) => {
@@ -154,12 +163,6 @@ function SpellingBee() {
     backgroundColor: 'red',
   };
 
-  const revealButtonStyle = {
-    ...buttonStyle,
-    backgroundColor: 'yellow',
-    color: 'black',
-  };
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -168,8 +171,9 @@ function SpellingBee() {
     <div className="border-solid rounded-xl border-2 border-indigo-400 border-dotted
       m-auto max-w-2xl p-8 my-8 flex flex-col
     ">
-
-      <h1 className="font-bold text-4xl"> Spelling Bee Game </h1>
+      <h1 className="font-bold text-5xl flex justify-center text-blue-500">
+        Spelling.  <span className="text-green-500">Bee</span>
+      </h1>
 
       <br /> <hr /> <br />
 
@@ -202,9 +206,11 @@ function SpellingBee() {
             placeholder="• Enter your guess."
           />
 
+          {/* ----------------------------------- I'm at HERE! ----------------------------------- */}
+          {/* Need to Fix that the button "Play Word" is deleting one live each time, thats no right */}
           <div className="flex justify-between my-2 mb-4 tracking-wider text-bold">
-            <button className="bg-green-600" style={buttonStyle} type="submit">Submit </button>
-            <button className="bg-blue-600" style={buttonStyle} onClick={() => playAudio(word)}>Play Word</button>
+            <button className="bg-green-600" style={buttonStyle} type="submit"> Submit </button>
+            <button className="bg-blue-600" style={buttonStyle} type="button" onClick={() => playAudio(word)}>Play Word</button>
             <button style={skipButtonStyle} onClick={handleSkip}>Skip</button>
             {/* <button style={buttonStyle} onClick={() => playAudio(definition)}>Play Definition</button> */}
           </div>
@@ -213,30 +219,43 @@ function SpellingBee() {
             <button className="rounded-lg w-full bg-yellow-400 tracking-wider py-2 text-bold" onClick={handleRevealAnswer}>
               Reveal Answer
             </button>
-            {/* ----------------------------------- I at HERE! ----------------------------------- */}
-            {isAnswerRevealed && <button style={revealButtonStyle} onClick={handleNextWord}> Next Word </button>}
+
+            <div className="flex align-center justify-between my-4 bg-zinc-100 rounded-xl">
+              <div className="indent-6 self-center">
+                <span className="text-blue-500">{beforeFeedback}</span>
+                <span className="text-red-500">{feedback}</span>
+              </div>
+              {/* hover:scale-110 */}
+              {isAnswerRevealed && <button onClick={handleNextWord}
+                className="bg-indigo-600 rounded-lg p-2 m-2 text-bold text-white
+                  hover:drop-shadow-lg  hover:bg-indigo-500
+                  transition-transform duration-300
+                ">
+                Next Word
+              </button>}
+            </div>
           </div>
         </form>
 
-        <p>{feedback}</p>
 
         {isGameOver && <button style={buttonStyle} onClick={handleNewGame}>New Game</button>}
       </div>
 
-      {/* <br /> <hr /> <br /> */}
-
-      <button onClick={toggleInstructions} className="m-4 text-2xl font-bold text-indigo-400">
+      <button onClick={toggleInstructions} className="m-4 text-2xl font-bold text-indigo-400
+        hover:text-indigo-500 hover:scale-110
+        transition-transform duration-300
+      ">
         {showInstructions ? 'Hide Instructions' : 'Show Instructions'}
       </button>
 
       {showInstructions && (
         <div className="border-solid rounded-xl border-2 border-indigo-400 border-dotted
-          m-auto max-w-2xl p-8 bg-white
-        ">
+            m-auto max-w-2xl p-8 bg-white
+          ">
 
           <div className="flex flex-col justify-center">
             <h2 className="text-lg font-bold bg-zinc-100 rounded-lg my-4 py-2
-              hover:text-orange-600 text-center
+              text-orange-600 text-center
             ">
               How to Play
             </h2>

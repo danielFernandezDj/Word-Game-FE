@@ -6,7 +6,11 @@ function SpellingBee() {
   const [word, setWord] = useState('');
   const [definition, setDefinition] = useState('');
   const [guess, setGuess] = useState('');
+
   const [feedback, setFeedback] = useState('');
+  const [beforeFeedback, setBeforeFeedback] = useState('');
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+
   const [hearts, setHearts] = useState(['❤️', '❤️', '❤️', '❤️', '❤️']);
   const [correctGuesses, setCorrectGuesses] = useState(0);
   const [isGameOver, setIsGameOver] = useState(false);
@@ -46,7 +50,7 @@ function SpellingBee() {
   };
 
   const fetchNewWord = useCallback(async () => {
-    setIsLoading(true);
+    // setIsLoading(true);
     setIsAnswerRevealed(false);
     let validWordFound = false;
     while (!validWordFound) {
@@ -65,6 +69,7 @@ function SpellingBee() {
     }
     setGuess('');
     setFeedback('');
+    setBeforeFeedback('');
     setIsLoading(false);
   }, []);
 
@@ -123,7 +128,12 @@ function SpellingBee() {
         setFeedback("Congratulations! You've reached 10 correct guesses!");
         recordScore();
       } else {
-        fetchNewWord();
+        // fetchNewWord();
+        playAudio(word)
+        setIsAnswerRevealed(true);
+        setFeedback(` ${word}`);
+        setBeforeFeedback(`Correct word is :`)
+        setIsSubmitDisabled(true)
       }
     } else {
       setFeedback(`Incorrect. Try again!`);
@@ -146,7 +156,10 @@ function SpellingBee() {
       setFeedback(`Game Over! You've run out of hearts. You got ${correctGuesses} words correct.`);
       recordScore();
     } else {
-      fetchNewWord();
+      setIsAnswerRevealed(true);
+      // setFeedback(` ${word}`);
+      // setBeforeFeedback(`Correct word is :`)
+      setIsSubmitDisabled(true)
     }
   };
 
@@ -156,6 +169,7 @@ function SpellingBee() {
     setCorrectGuesses(0);
     setIsGameOver(false);
     fetchNewWord();
+    setIsSubmitDisabled(false)
   };
 
   const toggleInstructions = (e) => {
@@ -166,21 +180,25 @@ function SpellingBee() {
   const handleRevealAnswer = (e) => {
     e.preventDefault();
     setIsAnswerRevealed(true);
-    setFeedback(`The correct word is: ${word}`);
+    setIsSubmitDisabled(true)
+    setFeedback(` ${word}`);
+    setBeforeFeedback(`Correct word is :`)
   };
 
   const handleNextWord = (e) => {
     e.preventDefault();
     fetchNewWord();
+    setIsSubmitDisabled(false)
   };
 
   const buttonStyle = {
-    backgroundColor: 'blue',
+    // backgroundColor: 'blue',
     color: 'white',
-    padding: '10px 15px',
+    padding: '1rem 1rem',
+    width: '100%',
     margin: '5px',
     border: 'none',
-    borderRadius: '5px',
+    borderRadius: '6px',
     cursor: 'pointer',
   };
 
@@ -189,44 +207,83 @@ function SpellingBee() {
     backgroundColor: 'red',
   };
 
-  const revealButtonStyle = {
-    ...buttonStyle,
-    backgroundColor: 'yellow',
-    color: 'black',
-  };
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div>
-      <h1>Spelling Bee Game</h1>
-      <p>Definition: {definition}</p>
-      <div style={{ marginBottom: '10px' }}>
-        <button style={buttonStyle} onClick={() => playAudio(word)}>Play Word</button>
-        <button style={buttonStyle} onClick={() => playAudio(definition)}>Play Definition</button>
-      </div>
-      <form onSubmit={handleGuess}>
-        <input
-          type="text"
-          value={guess}
-          onChange={(e) => setGuess(e.target.value)}
-          placeholder="Enter your guess"
-          style={{ marginBottom: '10px' }}
-        />
-        <div style={{ marginBottom: '10px' }}>
-          <button style={buttonStyle} type="submit">Submit Guess</button>
-          <button style={skipButtonStyle} onClick={handleSkip}>Skip</button>
-          <button style={revealButtonStyle} onClick={handleRevealAnswer}>Reveal Answer</button>
-          {isAnswerRevealed && <button style={revealButtonStyle} onClick={handleNextWord}>Next Word</button>}
+    <div className="border-solid rounded-xl border-2 border-indigo-400 border-dotted
+      m-auto max-w-2xl p-8 my-8 flex flex-col
+    ">
+      <h1 className="font-bold text-5xl flex justify-center text-blue-500">
+        Spelling.  <span className="text-green-500">Bee</span>
+      </h1>
+
+      <br /> <hr /> <br />
+
+      <div className="border-solid rounded-xl border-2 border-indigo-400 border-dotted
+        p-8 bg-white
+        ">
+        <div className="flex flex-row justify-between">
+          <div>
+            {/* Hearts:  */}
+            {hearts.map((heart, index) => (<span key={index} className="m-1">{heart}</span>
+            ))}
+          </div>
+          <p className="text-bold italic">
+            Correct : {correctGuesses}
+          </p>
         </div>
-      </form>
-      <p>{feedback}</p>
-      <div>
-        Hearts: {hearts.map((heart, index) => (
-          <span key={index}>{heart}</span>
-        ))}
+
+        <br /> <hr /> <br />
+
+        <p className="mb-4">
+          <strong>Definition : </strong>
+          <span className="text-justify m-auto max-w-xl leading-relaxed indent-4">{definition}</span>
+        </p>
+
+        <form onSubmit={handleGuess}>
+          <input className="border-solid rounded-xl border-2 border-indigo-400 border-dotted mb-2 pl-4 py-2 w-full text-lg"
+            type="text"
+            value={guess}
+            onChange={(e) => setGuess(e.target.value)}
+            placeholder="• Enter your guess."
+          />
+
+          {/* ----------------------------------- I'm at HERE! ----------------------------------- */}
+          {/* Need to Fix that the button "Play Word" is deleting one live each time, thats no right */}
+          <div className="flex justify-between my-2 mb-4 tracking-wider text-bold">
+            <button className="bg-green-600" style={buttonStyle} type="submit" disabled={isSubmitDisabled}> Submit </button>
+            <button className="bg-blue-600" style={buttonStyle} type="button" onClick={() => playAudio(word)}>Play Word</button>
+            <button style={skipButtonStyle} onClick={handleSkip} disabled={isSubmitDisabled}>Skip</button>
+            {/* <button style={buttonStyle} onClick={() => playAudio(definition)}>Play Definition</button> */}
+          </div>
+
+          <div>
+            <button className="rounded-lg w-full bg-yellow-400 tracking-wider py-2 text-bold" onClick={handleRevealAnswer}>
+              Reveal Answer
+            </button>
+
+            <div className="flex align-center justify-between my-4 bg-zinc-100 rounded-xl">
+              <div className="indent-6 self-center">
+                <span className="text-blue-500">{beforeFeedback}</span>
+                <span className="text-red-500">{feedback}</span>
+              </div>
+              {/* hover:scale-110 */}
+              {isAnswerRevealed &&
+                <button onClick={handleNextWord}
+                  className="bg-indigo-600 rounded-lg p-2 m-2 text-bold text-white
+                  hover:drop-shadow-lg  hover:bg-indigo-500
+                  transition-transform duration-300
+                ">
+                  Next Word
+                </button>}
+            </div>
+          </div>
+        </form>
+
+
+        {isGameOver && <button style={buttonStyle} onClick={handleNewGame}>New Game</button>}
       </div>
       <p>Correct Guesses: {correctGuesses}</p>
       {isGameOver && (
@@ -244,14 +301,50 @@ function SpellingBee() {
       <button style={buttonStyle} onClick={toggleInstructions}>
         {showInstructions ? 'Hide Instructions' : 'Show Instructions'}
       </button>
+
       {showInstructions && (
-        <div>
-          <h2>Instructions:</h2>
-          <p>1. Listen to the word and read its definition.</p>
-          <p>2. Type your guess for the word in the input field.</p>
-          <p>3. Click 'Submit Guess' to check your answer.</p>
-          <p>4. You have 5 hearts. Each incorrect guess loses a heart.</p>
-          <p>5. Try to guess 10 words correctly to win!</p>
+        <div className="border-solid rounded-xl border-2 border-indigo-400 border-dotted
+            m-auto max-w-2xl p-8 bg-white
+          ">
+
+          <div className="flex flex-col justify-center">
+            <h2 className="text-lg font-bold bg-zinc-100 rounded-lg my-4 py-2
+              text-orange-600 text-center
+            ">
+              How to Play
+            </h2>
+            <h3 className="text-justify m-auto max-w-xl leading-relaxed indent-4">
+              Spelling Bee is a word challenge game where the goal is to correctly
+              spell a word based on its definition. Here's how it works:
+            </h3>
+
+            <br />
+
+            <div className="text-justify m-auto max-w-xl leading-relaxed">
+              <p className=" my-2 "><strong className="text-orange-600">1- Starting a Game:</strong> Each round begins by listening to the word and reading its definition.</p>
+
+              <hr />
+
+              <p className=" my-2 "><strong className="text-orange-600">2- Entering Your Guess:</strong> Type your guess for the word in the input field.</p>
+
+              <hr />
+
+              <p className=" my-2 "><strong className="text-orange-600">3- Feedback:</strong></p>
+              <p className="indent-4">
+                <strong className="text-green-600">* Correct Guess:</strong> If you guess the word correctly, your score will increase, and you move to the next word.
+              </p>
+              <p className="indent-4">
+                <strong className="text-gray-500">* Incorrect Guess:</strong> If you guess wrong, you lose one of your 5 hearts.
+              </p>
+
+              <hr />
+
+              <p className=" my-2 "><strong className="text-orange-600">4- Winning: </strong> You win by guessing 10 words correctly before running out of hearts.
+                If you lose all 5 hearts, the game ends.
+              </p>
+            </div>
+          </div>
+
         </div>
       )}
     </div>

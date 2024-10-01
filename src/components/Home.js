@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useSound from "use-sound"
+
 
 // COMPONENTS
 import WordlePanel from "./homePanels/WordlePanel";
@@ -20,6 +22,11 @@ function Home() {
   const handleSudokuClick = () => {
     setPanelComponent(<SudokuPanel />);
   }
+
+  // Play a soundFX on click.
+    function PlayNewSound() {
+      const [playOn] = useSound('/audio/new-audio.wav'); // import newAudio from './audio/new-audio.wav';
+    }
 
   return (
     <div className="text-center mt-8">

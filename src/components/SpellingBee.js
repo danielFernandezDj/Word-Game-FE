@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 function SpellingBee() {
   const [word, setWord] = useState('');
@@ -12,7 +13,9 @@ function SpellingBee() {
   const [isLoading, setIsLoading] = useState(true);
   const [showInstructions, setShowInstructions] = useState(true);
   const [isAnswerRevealed, setIsAnswerRevealed] = useState(false);
+  const [user, setUser] = useState(null);
 
+  const navigate = useNavigate();
   const audioRef = useRef(new SpeechSynthesisUtterance());
 
   const playAudio = useCallback((text) => {
@@ -67,6 +70,16 @@ function SpellingBee() {
 
   useEffect(() => {
     fetchNewWord();
+    // Check if user is logged in
+    const checkUser = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/user`, { withCredentials: true });
+        setUser(response.data);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    };
+    checkUser();
   }, [fetchNewWord]);
 
   const loseHeart = () => {
@@ -80,6 +93,26 @@ function SpellingBee() {
     });
   };
 
+  const recordScore = async () => {
+    if (user) {
+      try {
+        await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/scores`, {
+          userId: user.id,
+          score: correctGuesses,
+          game: 'SpellingBee'
+        });
+        setFeedback('Score recorded successfully!');
+        // Redirect to leaderboard after a short delay
+        setTimeout(() => navigate('/leaderboard'), 2000);
+      } catch (error) {
+        console.error('Error recording score:', error);
+        setFeedback('Failed to record score. Please try again.');
+      }
+    } else {
+      setFeedback('Sign up to save your score and compete on the leaderboard!');
+    }
+  };
+
   const handleGuess = (e) => {
     e.preventDefault();
     if (guess.toLowerCase() === word.toLowerCase()) {
@@ -88,6 +121,7 @@ function SpellingBee() {
       if (correctGuesses + 1 >= 10) {
         setIsGameOver(true);
         setFeedback("Congratulations! You've reached 10 correct guesses!");
+        recordScore();
       } else {
         fetchNewWord();
       }
@@ -97,6 +131,7 @@ function SpellingBee() {
       if (hearts.filter(h => h === '❤️').length <= 1) {
         setIsGameOver(true);
         setFeedback(`Game Over! You've run out of hearts. You got ${correctGuesses} words correct.`);
+        recordScore();
       }
     }
     setGuess('');
@@ -109,6 +144,7 @@ function SpellingBee() {
     if (hearts.filter(h => h === '❤️').length <= 1) {
       setIsGameOver(true);
       setFeedback(`Game Over! You've run out of hearts. You got ${correctGuesses} words correct.`);
+      recordScore();
     } else {
       fetchNewWord();
     }
@@ -193,7 +229,18 @@ function SpellingBee() {
         ))}
       </div>
       <p>Correct Guesses: {correctGuesses}</p>
-      {isGameOver && <button style={buttonStyle} onClick={handleNewGame}>New Game</button>}
+      {isGameOver && (
+        <div>
+          <button style={buttonStyle} onClick={handleNewGame}>New Game</button>
+          {!user && (
+            <div>
+              <p>Sign up to save your score and compete on the leaderboard!</p>
+              <Link to="/signup" style={buttonStyle}>Sign Up</Link>
+            </div>
+          )}
+          <button style={buttonStyle} onClick={() => navigate('/leaderboard')}>View Leaderboard</button>
+        </div>
+      )}
       <button style={buttonStyle} onClick={toggleInstructions}>
         {showInstructions ? 'Hide Instructions' : 'Show Instructions'}
       </button>

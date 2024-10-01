@@ -22,7 +22,6 @@ function Home() {
   }
 
   return (
- 
     <div className="text-center mt-8">
       <h1 className="text-6xl font-bold">
         <span className="text-zinc-900"> Welcome to </span>
@@ -38,7 +37,7 @@ function Home() {
       <div className="flex flex-wrap justify-center">
 
         {/* WORD-LE ---------------------- */}
-        <div className=' basis-1/3 m-6 flex flex-col justify-center
+        <div className='basis-1/3 m-6 flex flex-col justify-center
             hover:scale-110
             transition-transform duration-300'
           onClick={handleWordleCLick}
@@ -84,7 +83,13 @@ function Home() {
       {/* Panels Components displayed here! */}
       <div className="my-8">
         {panelComponent}
+      </div>
 
+      {/* Added Link component */}
+      <div className="mt-4">
+        <Link to="/about" className="text-blue-500 hover:underline">
+          About Word Games
+        </Link>
       </div>
     </div>
   );

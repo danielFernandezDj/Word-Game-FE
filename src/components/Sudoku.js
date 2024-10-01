@@ -1,16 +1,87 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 function Sudoku() {
-  const [board, setBoard] = useState(createInitialBoard());
+  const [board, setBoard] = useState([]);
+  const [solution, setSolution] = useState([]);
   const [isComplete, setIsComplete] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [showSolution, setShowSolution] = useState(false);
+
+  const generateSudoku = useCallback(() => {
+    const sudoku = Array(9).fill().map(() => Array(9).fill(0));
+    const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+    function isValid(board, row, col, num) {
+      for (let x = 0; x < 9; x++) {
+        if (board[row][x] === num || board[x][col] === num) {
+          return false;
+        }
+      }
+      const boxRow = Math.floor(row / 3) * 3;
+      const boxCol = Math.floor(col / 3) * 3;
+      for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+          if (board[boxRow + i][boxCol + j] === num) {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    function fillBoard(board) {
+      for (let row = 0; row < 9; row++) {
+        for (let col = 0; col < 9; col++) {
+          if (board[row][col] === 0) {
+            nums.sort(() => Math.random() - 0.5);
+            for (let num of nums) {
+              if (isValid(board, row, col, num)) {
+                board[row][col] = num;
+                if (fillBoard(board)) {
+                  return true;
+                }
+                board[row][col] = 0;
+              }
+            }
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    fillBoard(sudoku);
+    return sudoku;
+  }, []);
+
+  const createPuzzle = useCallback((fullSudoku) => {
+    const puzzle = fullSudoku.map(row => [...row]);
+    const numToRemove = 40; // Adjust this number to change difficulty
+    let removed = 0;
+    while (removed < numToRemove) {
+      const row = Math.floor(Math.random() * 9);
+      const col = Math.floor(Math.random() * 9);
+      if (puzzle[row][col] !== 0) {
+        puzzle[row][col] = 0;
+        removed++;
+      }
+    }
+    return puzzle;
+  }, []);
+
+  useEffect(() => {
+    const fullSolution = generateSudoku();
+    const newPuzzle = createPuzzle(fullSolution);
+    setBoard(newPuzzle);
+    setSolution(fullSolution);
+  }, [generateSudoku, createPuzzle]);
 
   const checkCompletion = useCallback(() => {
-    const isFilled = board.every(row => row.every(cell => cell !== null));
+    const isFilled = board.every(row => row.every(cell => cell !== 0));
     setIsComplete(isFilled);
-    setIsCorrect(isValidSolution(board));
-  }, [board]);
+    setIsCorrect(JSON.stringify(board) === JSON.stringify(solution));
+  }, [board, solution]);
 
   useEffect(() => {
     if (submitted) {
@@ -18,54 +89,10 @@ function Sudoku() {
     }
   }, [submitted, checkCompletion]);
 
-  function createInitialBoard() {
-    const initialBoard = Array(9).fill(null).map(() => Array(9).fill(null));
-    initialBoard[0][0] = 5; initialBoard[0][1] = 3; initialBoard[0][4] = 7;
-    initialBoard[1][0] = 6; initialBoard[1][3] = 1; initialBoard[1][4] = 9; initialBoard[1][5] = 5;
-    initialBoard[2][1] = 9; initialBoard[2][2] = 8; initialBoard[2][7] = 6;
-    initialBoard[3][0] = 8; initialBoard[3][4] = 6; initialBoard[3][8] = 3;
-    initialBoard[4][0] = 4; initialBoard[4][3] = 8; initialBoard[4][5] = 3; initialBoard[4][8] = 1;
-    initialBoard[5][0] = 7; initialBoard[5][4] = 2; initialBoard[5][8] = 6;
-    initialBoard[6][1] = 6; initialBoard[6][6] = 2; initialBoard[6][7] = 8;
-    initialBoard[7][3] = 4; initialBoard[7][4] = 1; initialBoard[7][5] = 9; initialBoard[7][8] = 5;
-    initialBoard[8][4] = 8; initialBoard[8][7] = 7; initialBoard[8][8] = 9;
-    return initialBoard;
-  }
-
   function handleChange(row, col, value) {
     const newBoard = board.map(r => [...r]);
-    newBoard[row][col] = value === '' ? null : Number(value);
+    newBoard[row][col] = value === '' ? 0 : Number(value);
     setBoard(newBoard);
-  }
-
-  function isValidSolution(board) {
-    // Check rows
-    for (let i = 0; i < 9; i++) {
-      if (new Set(board[i].filter(cell => cell !== null)).size !== board[i].filter(cell => cell !== null).length) return false;
-    }
-
-    // Check columns
-    for (let i = 0; i < 9; i++) {
-      const column = board.map(row => row[i]).filter(cell => cell !== null);
-      if (new Set(column).size !== column.length) return false;
-    }
-
-    // Check 3x3 sub-grids
-    for (let i = 0; i < 9; i += 3) {
-      for (let j = 0; j < 9; j += 3) {
-        const subGrid = [];
-        for (let x = 0; x < 3; x++) {
-          for (let y = 0; y < 3; y++) {
-            if (board[i + x][j + y] !== null) {
-              subGrid.push(board[i + x][j + y]);
-            }
-          }
-        }
-        if (new Set(subGrid).size !== subGrid.length) return false;
-      }
-    }
-
-    return true;
   }
 
   function handleSubmit() {
@@ -73,22 +100,34 @@ function Sudoku() {
   }
 
   function retry() {
-    setBoard(createInitialBoard());
+    const fullSolution = generateSudoku();
+    const newPuzzle = createPuzzle(fullSolution);
+    setBoard(newPuzzle);
+    setSolution(fullSolution);
     setIsComplete(false);
     setIsCorrect(false);
     setSubmitted(false);
+    setShowSolution(false);
   }
 
   function renderCell(row, col) {
+    const initialValue = board[row][col];
+    const currentValue = board[row][col];
+    const solutionValue = solution[row][col];
+
     return (
       <input
         type="number"
-        value={board[row][col] || ''}
+        value={showSolution ? solutionValue : (currentValue || '')}
         onChange={(e) => handleChange(row, col, e.target.value)}
         min="1"
         max="9"
-        className="w-10 h-10 text-center border border-gray-300"
-        disabled={submitted}
+        className={`w-10 h-10 text-center border-none font-bold text-lg ${
+          initialValue ? 'bg-gray-200' : ''
+        } ${
+          showSolution && currentValue !== solutionValue ? 'text-red-500' : ''
+        }`}
+        disabled={submitted || initialValue !== 0 || showSolution}
       />
     );
   }
@@ -96,11 +135,20 @@ function Sudoku() {
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-2xl font-bold mb-4">Sudoku Game</h1>
-      <div className="grid grid-cols-9 gap-1 mb-4">
+      <div className="grid grid-cols-9 gap-0 mb-4 border-4 border-gray-800">
         {board.map((row, rowIndex) => (
           <React.Fragment key={rowIndex}>
             {row.map((cell, colIndex) => (
-              <div key={colIndex} className={`border ${colIndex % 3 === 2 && colIndex !== 8 ? 'border-r-2' : ''} ${rowIndex % 3 === 2 && rowIndex !== 8 ? 'border-b-2' : ''} border-gray-400`}>
+              <div 
+                key={colIndex} 
+                className={`
+                  ${colIndex % 3 === 0 ? 'border-l-4' : 'border-l-2'}
+                  ${rowIndex % 3 === 0 ? 'border-t-4' : 'border-t-2'}
+                  ${colIndex === 8 ? 'border-r-4' : ''}
+                  ${rowIndex === 8 ? 'border-b-4' : ''}
+                  border-gray-800
+                `}
+              >
                 {renderCell(rowIndex, colIndex)}
               </div>
             ))}
@@ -126,10 +174,16 @@ function Sudoku() {
             </p>
           )}
           <button
+            onClick={() => setShowSolution(!showSolution)}
+            className="mt-4 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mr-2"
+          >
+            {showSolution ? 'Hide Solution' : 'Show Solution'}
+          </button>
+          <button
             onClick={retry}
             className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
-            Retry
+            New Game
           </button>
         </div>
       )}

@@ -30,7 +30,7 @@ function App() {
               <div className="flex justify-between">
                 <div className="flex space-x-7">
                   <div className="flex items-center py-4 px-2">
-                    <Link to="/" className="font-semibold text-gray-500 text-lg">Word Games</Link>
+                    <Link to="/" className="font-semibold text-gray-500 text-lg">Word World</Link>
                   </div>
                   <div className="hidden md:flex items-center space-x-1">
                     <Link to="/" className="py-4 px-2 text-gray-500 hover:text-green-500 transition duration-300">Home</Link>
@@ -72,7 +72,7 @@ function App() {
           {/* Footer */}
           <footer className="bg-white shadow-lg py-4 mt-auto">
             <div className="max-w-6xl mx-auto px-4 text-center text-gray-500">
-              <p>&copy; {new Date().getFullYear()} Word Games. All rights reserved.</p>
+              <p>&copy; {new Date().getFullYear()} Word World. All rights reserved.</p>
               <p>
                 <Link to="/" className="hover:text-green-500 transition duration-300">Home</Link> |
                 <Link to="/wordle" className="hover:text-green-500 transition duration-300 mx-2">Wordle</Link> |

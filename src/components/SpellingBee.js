@@ -176,8 +176,8 @@ function SpellingBee() {
   }
 
   return (
-    <div className="border-solid rounded-xl border-2 border-indigo-400 border-dotted
-      m-auto max-w-2xl p-8 my-8 flex flex-col
+    <div className=" md:border-solid md:rounded-xl md:border-2 md:border-indigo-400 md:border-dotted
+      m-auto max-w-2xl md:p-8 md:mx-2 my-8 flex flex-col
     ">
       <h1 className="font-bold text-5xl flex justify-center text-blue-500">
         Spelling.  <span className="text-green-500">Bee</span>
@@ -186,7 +186,7 @@ function SpellingBee() {
       <br /> <hr /> <br />
 
       <div className="border-solid rounded-xl border-2 border-indigo-400 border-dotted
-        p-8 bg-white
+          p-8 bg-white
         ">
         <div className="flex flex-row justify-between">
           <div>

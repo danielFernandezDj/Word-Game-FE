@@ -83,10 +83,10 @@ const Wordle = () => {
 
     return (
         <div className=" md:border-solid md:rounded-xl md:border-2 md:border-indigo-400 md:border-dotted
-        m-auto max-w-2xl md:p-8 md:mx-2 md:mt-8 mb-8 lg:mb-14 flex flex-col
+        m-auto max-w-2xl p-8 md:mx-2 md:mt-8 mb-8 lg:mb-14 flex flex-col
         ">
             {/* TITLE */}
-            <h1 className="text-center text-5xl font-bold mt-8">
+            <h1 className="text-center text-5xl font-bold">
                 <span className="text-indigo-500 tracking-widest">Word-</span>
                 <span className="text-orange-500 tracking-widest">Le …</span>
             </h1>

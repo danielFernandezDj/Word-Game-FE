@@ -68,7 +68,7 @@ function App() {
             </div>
           </nav>
 
-          {/* MENU 2 */}
+          {/* MENU 2 for MOBILE-SIZE*/}
           <div className="md:hidden bg-white shadow-lg py-4
             sticky top-0 bg-white z-50 shadow-md
           ">
@@ -82,9 +82,8 @@ function App() {
             </div>
           </div>
 
-
-          {/* Content container with flex-grow to push the footer down */}
-          <div className="flex-grow max-w-6xl mx-auto mt-8 px-4">
+              {/* DISPLAY_COMPONENTS */}
+          <div className="flex-grow max-w-6xl m-auto">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
@@ -96,7 +95,7 @@ function App() {
             </Routes>
           </div>
 
-          {/* Sticky footer */}
+          {/* Footer */}
           <footer className="bg-white shadow-lg py-4">
             <div className="max-w-6xl mx-auto px-4 text-center text-gray-500">
               <p>&copy; {new Date().getFullYear()} Word World. All rights reserved.</p>

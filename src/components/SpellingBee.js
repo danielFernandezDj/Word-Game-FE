@@ -213,9 +213,7 @@ function SpellingBee() {
             onChange={(e) => setGuess(e.target.value)}
             placeholder="• Enter your guess."
           />
-
-          {/* ----------------------------------- I'm at HERE! ----------------------------------- */}
-          {/* Need to Fix that the button "Play Word" is deleting one live each time, thats no right */}
+          
           <div className="flex justify-between my-2 mb-4 tracking-wider text-bold">
             <button className="bg-green-600" style={buttonStyle} type="submit" disabled={isSubmitDisabled}> Submit </button>
             <button className="bg-blue-600" style={buttonStyle} type="button" onClick={() => playAudio(word)}>Play Word</button>

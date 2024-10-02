@@ -21,9 +21,11 @@ const Login = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-8">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+    <section className="lg:flex lg:items-center lg:justify-center lg:h-screen | lg:-mt-16">
+      <div className="max-w-md p-6 m-8 bg-white shadow-lg rounded-lg">
+        <h2 className="text-2xl font-bold mb-6 text-center text-slate-900">
+          Login
+        </h2>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         <input
           type="text"
@@ -39,17 +41,18 @@ const Login = ({ onLoginSuccess }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button 
-          onClick={handleLogin} 
+        <button
+          onClick={handleLogin}
           className="w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-300"
         >
           Login
         </button>
+
         <p className="mt-4 text-center">
           Don't have an account? <a href="/signup" className="text-green-500 hover:underline">Sign Up</a>
         </p>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -24,12 +24,11 @@ function Home() {
   }
 
   // Play a soundFX on click.
-    function PlayNewSound() {
-      const [playOn] = useSound('/audio/new-audio.wav'); // import newAudio from './audio/new-audio.wav';
-    }
+  function PlayNewSound() {
+    const [playOn] = useSound('/audio/new-audio.wav'); // import newAudio from './audio/new-audio.wav';
+  }
 
   return (
-
     <div className="text-center mt-8">
       <h1 className="text-6xl font-bold">
         <span className="text-zinc-900"> Welcome to </span>

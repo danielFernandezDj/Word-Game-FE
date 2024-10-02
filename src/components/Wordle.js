@@ -77,37 +77,57 @@ const Wordle = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
-            <h1 className="text-4xl font-bold mb-4">Wordle Clone</h1>
+        <div className=" md:border-solid md:rounded-xl md:border-2 md:border-indigo-400 md:border-dotted
+        m-auto max-w-2xl md:p-8 md:mx-2 md:mt-8 mb-8 lg:mb-14 flex flex-col
+        ">
+            {/* TITLE */}
+            <h1 className="text-center text-5xl font-bold">
+                <span className="text-indigo-500 tracking-widest">Word-</span>
+                <span className="text-orange-500 tracking-widest">Le …</span>
+            </h1>
+
+            <br /> <hr /> <br />
+
+            {/* 6-ROW */}
             <div className="flex flex-col items-center mb-4">
                 {/* Render all 6 rows, filling them with current guesses or leaving them empty */}
                 {attempts.map((attempt, index) => (
-                    <GuessRow key={index} guess={attempt} target={randomWord} />
+                    <GuessRow key={index} guess={attempt} target={randomWord}
+                        className="mx-4"
+                    />
                 ))}
                 {/* Input field for the current guess */}
                 {attempts.some(attempt => attempt === '') && (
                     <input
                         type="text"
+                        placeholder="• Type here!"
                         value={currentGuess}
                         onChange={(e) => setCurrentGuess(e.target.value.toLowerCase())}
                         maxLength="5"
-                        className="border border-gray-300 rounded p-2 mb-2 text-center w-24"
+                        className="border border-gray-300 rounded p-2 mt-2 text-center w-xl"
                     />
                 )}
             </div>
-            <button
-                onClick={handleGuess}
-                className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 mb-2"
-            >
-                Submit Guess
-            </button>
-            <button
-                onClick={fetchRandomWord}
-                className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600"
-            >
-                New Word
-            </button>
-            <div className="mt-4 text-red-500">{message}</div>
+
+            <hr /> <br />
+
+            {/* ACTION BTN */}
+            <div className="flex flex-col ">
+                <button
+                    onClick={handleGuess}
+                    className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 mb-2"
+                >
+                    Submit Guess
+                </button>
+                <button
+                    onClick={fetchRandomWord}
+                    className="bg-indigo-500 text-white font-bold py-2 px-4 rounded hover:bg-indigo-600"
+                >
+                    New Word
+                </button>
+
+                <div className="flex justify-center mt-2 text-red-500">{message}</div>
+            </div>
         </div>
     );
 };
@@ -116,7 +136,7 @@ const GuessRow = ({ guess, target }) => {
     const guessArray = guess.split('');
     const targetArray = target.split('');
     const squares = guessArray.map((letter, index) => {
-        let className = 'w-12 h-12 border border-gray-300 flex items-center justify-center text-2xl font-bold';
+        let className = 'w-22 h-22 flex items-center justify-center text-2xl font-bold';
         if (letter === targetArray[index]) {
             className += ' bg-green-500 text-white';
         } else if (targetArray.includes(letter)) {
@@ -129,11 +149,13 @@ const GuessRow = ({ guess, target }) => {
 
     // Fill empty squares for the remaining letters in the row
     const emptySquares = Array(5 - guessArray.length).fill(null).map((_, index) => (
-        <div className="w-12 h-12 border border-gray-300 flex items-center justify-center text-2xl font-bold bg-gray-200" key={index}></div>
+        <div key={index} className="w-12 h-12 m-1 flex items-center justify-center
+            text-2xl font-bold bg-gray-200 border-solid border-2 border-indigo-300 border-dotted"
+            ></div>
     ));
 
     return (
-        <div className="flex mb-2">
+        <div className="flex mb-1">
             {squares}
             {emptySquares}
         </div>

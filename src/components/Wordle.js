@@ -1,5 +1,4 @@
 // src/Wordle.js
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -8,6 +7,7 @@ const Wordle = () => {
     const [attempts, setAttempts] = useState(Array(6).fill('')); // Initialize attempts for 6 tries
     const [currentGuess, setCurrentGuess] = useState('');
     const [message, setMessage] = useState('');
+    const [showInstructions, setShowInstructions] = useState(true);
 
     useEffect(() => {
         fetchRandomWord();
@@ -76,9 +76,14 @@ const Wordle = () => {
         setMessage('');
     };
 
+    const toggleInstructions = (e) => {
+        e.preventDefault();
+        setShowInstructions(prev => !prev);
+    };
+
     return (
         <div className=" md:border-solid md:rounded-xl md:border-2 md:border-indigo-400 md:border-dotted
-        m-auto max-w-2xl md:p-8 md:mx-2 md:mt-8 mb-8 lg:mb-14 flex flex-col
+        m-auto max-w-2xl p-8 md:mx-2 md:mt-8 mb-8 lg:mb-14 flex flex-col
         ">
             {/* TITLE */}
             <h1 className="text-center text-5xl font-bold">
@@ -104,7 +109,7 @@ const Wordle = () => {
                         value={currentGuess}
                         onChange={(e) => setCurrentGuess(e.target.value.toLowerCase())}
                         maxLength="5"
-                        className="border border-gray-300 rounded p-2 mt-2 text-center w-xl"
+                        className="border border-gray-300 rounded p-2 my-2 text-center w-xl"
                     />
                 )}
             </div>
@@ -112,7 +117,7 @@ const Wordle = () => {
             <hr /> <br />
 
             {/* ACTION BTN */}
-            <div className="flex flex-col ">
+            <div className="flex flex-col m-auto max-w-sm">
                 <button
                     onClick={handleGuess}
                     className="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 mb-2"
@@ -128,6 +133,52 @@ const Wordle = () => {
 
                 <div className="flex justify-center mt-2 text-red-500">{message}</div>
             </div>
+
+            <br /> <hr />
+
+            {/* ---------------------------- Instruction + BTN ---------------------------- */}
+            <button onClick={toggleInstructions} className="m-4 text-2xl font-bold text-indigo-400
+                hover:text-indigo-500 hover:scale-110
+                transition-transform duration-300
+            ">
+                {showInstructions ? 'Hide Instructions' : 'Show Instructions'}
+            </button>
+
+            {showInstructions && (
+                <div className="border-solid rounded-xl border-2 border-indigo-400 border-dotted
+                    m-auto p-8 bg-white
+                ">
+                    <div className="text-justify m-auto max-w-md leading-relaxed">
+                        <p className=" my-2 "><strong className="text-orange-600">1- Starting a Game:</strong> You begin by entering any valid five-letter word.</p>
+
+                        <hr />
+
+                        <p className=" mt-2 "><strong className="text-orange-600">2- Feedback:</strong> After each guess, the game provides feedback using colored tiles:</p>
+                        <p className="indent-4">
+                            <strong className="text-green-600">* Green:</strong> The letter is correct and in the right position.
+                        </p>
+                        <p className="indent-4">
+                            <strong className="text-yellow-600">* Yellow:</strong> The letter is correct but in the wrong position.
+                        </p>
+                        <p className="indent-4">
+                            <strong className="text-gray-500">* Gray:</strong> The letter is not in the word at all.
+                        </p>
+
+                        <hr />
+
+                        <p className=" my-2 "><strong className="text-orange-600">3- Guessing:</strong> Use the feedback to inform your next guesses.
+                            For example, if a letter is yellow, you know it’s in the word but needs to be placed differently.
+                        </p>
+
+                        <hr />
+
+                        <p className=" my-2 "><strong className="text-orange-600">4- Winning: </strong>You win by guessing the word correctly within six tries.
+                            If you don’t guess it, the correct word is revealed at the end.
+                        </p>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 };
@@ -151,7 +202,7 @@ const GuessRow = ({ guess, target }) => {
     const emptySquares = Array(5 - guessArray.length).fill(null).map((_, index) => (
         <div key={index} className="w-12 h-12 m-1 flex items-center justify-center
             text-2xl font-bold bg-gray-200 border-solid border-2 border-indigo-300 border-dotted"
-            ></div>
+        ></div>
     ));
 
     return (

@@ -86,7 +86,7 @@ const Wordle = () => {
         m-auto max-w-2xl md:p-8 md:mx-2 md:mt-8 mb-8 lg:mb-14 flex flex-col
         ">
             {/* TITLE */}
-            <h1 className="text-center text-5xl font-bold">
+            <h1 className="text-center text-5xl font-bold mt-8">
                 <span className="text-indigo-500 tracking-widest">Word-</span>
                 <span className="text-orange-500 tracking-widest">Le …</span>
             </h1>

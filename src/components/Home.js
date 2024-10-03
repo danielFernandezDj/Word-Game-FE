@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import useSound from 'use-sound';
 import WordlePanel from './homePanels/WordlePanel';
 import SpellingPanel from './homePanels/SpellingPanel';
 import SudokuPanel from './homePanels/SudokuPanel';
 
 const Home = () => {
   const [panelComponent, setPanelComponent] = useState(<WordlePanel />);
-
-  const [playOn] = useSound('/audio/new-audio.wav');
 
   return (
     <div className="text-center mt-8">
@@ -44,12 +40,6 @@ const Home = () => {
       <div className="my-8">
         {panelComponent}
       </div>
-      {/* Uncomment the following block to add the 'About Word Games' link */}
-      {/* <div className="mt-4">
-        <Link to="/about" className="text-blue-500 hover:underline">
-          About Word Games
-        </Link>
-      </div> */}
     </div>
   );
 }

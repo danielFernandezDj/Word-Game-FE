@@ -249,7 +249,7 @@ function SpellingBee() {
             onChange={(e) => setGuess(e.target.value)}
             placeholder="• Enter your guess."
           />
-          
+
           <div className="flex justify-between my-2 mb-4 tracking-wider text-bold">
             <button className="bg-green-600" style={buttonStyle} type="submit" disabled={isSubmitDisabled}> Submit </button>
             <button className="bg-blue-600" style={buttonStyle} type="button" onClick={() => playAudio(word)}>Play Word</button>
@@ -283,7 +283,7 @@ function SpellingBee() {
 
         {isGameOver && <button style={buttonStyle} onClick={handleNewGame}>New Game</button>}
       </div>
-      <p>Correct Guesses: {correctGuesses}</p>
+      {/* <p>Correct Guesses: {correctGuesses}</p> */}
       {isGameOver && (
         <div>
           <button style={buttonStyle} onClick={handleNewGame}>New Game</button>
@@ -296,7 +296,10 @@ function SpellingBee() {
           <button style={buttonStyle} onClick={() => navigate('/leaderboard')}>View Leaderboard</button>
         </div>
       )}
-      <button style={buttonStyle} onClick={toggleInstructions}>
+      <button onClick={toggleInstructions} className="m-4 text-2xl font-bold text-indigo-400
+        hover:text-indigo-500 hover:scale-110
+        transition-transform duration-300
+      ">
         {showInstructions ? 'Hide Instructions' : 'Show Instructions'}
       </button>
 

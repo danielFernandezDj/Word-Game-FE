@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function SpellingPanel() {
   return (
-    <div className="border-none rounded-xl border-2 border-indigo-600
+    <div className="border-none md:rounded-xl border-2 border-indigo-600
         m-auto max-w-2xl p-8 bg-white
       ">
       <div className="flex flex-wrap justify-center content-center space-x-8

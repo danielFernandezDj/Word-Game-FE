@@ -92,12 +92,12 @@ function Home() {
         {panelComponent}
       </div>
 
-      {/* Added Link component */}
+      {/* Added Link component
       <div className="mt-4">
         <Link to="/about" className="text-blue-500 hover:underline">
           About Word Games
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }

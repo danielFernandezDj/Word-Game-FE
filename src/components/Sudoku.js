@@ -153,7 +153,7 @@ function Sudoku() {
             handleChange(row, col, value);
           }
         }}
-        className={`sudoku-input w-10 h-10 text-center border-none font-bold text-lg ${
+        className={`sudoku-input w-10 h-10 text-center border-none font-bold text-lg outline-none focus:outline-none ${
           initialValue ? 'bg-gray-200' : ''
         } ${
           showSolution && currentValue !== solutionValue ? 'text-red-500' : ''
@@ -177,7 +177,7 @@ function Sudoku() {
                   ${rowIndex % 3 === 0 ? 'border-t-4' : 'border-t-2'}
                   ${colIndex === 8 ? 'border-r-4' : ''}
                   ${rowIndex === 8 ? 'border-b-4' : ''}
-                  border-gray-800
+                  border-gray-800 relative
                 `}
               >
                 {renderCell(rowIndex, colIndex)}

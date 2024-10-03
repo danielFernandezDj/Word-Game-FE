@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import './Sudoku.css';
 
 function Sudoku() {
   const [board, setBoard] = useState([]);
@@ -7,6 +8,7 @@ function Sudoku() {
   const [isCorrect, setIsCorrect] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
+  const [initialBoard, setInitialBoard] = useState([]);
 
   const generateSudoku = useCallback(() => {
     const sudoku = Array(9).fill().map(() => Array(9).fill(0));
@@ -74,6 +76,7 @@ function Sudoku() {
     const fullSolution = generateSudoku();
     const newPuzzle = createPuzzle(fullSolution);
     setBoard(newPuzzle);
+    setInitialBoard(newPuzzle.map(row => [...row]));
     setSolution(fullSolution);
   }, [generateSudoku, createPuzzle]);
 
@@ -103,6 +106,7 @@ function Sudoku() {
     const fullSolution = generateSudoku();
     const newPuzzle = createPuzzle(fullSolution);
     setBoard(newPuzzle);
+    setInitialBoard(newPuzzle.map(row => [...row]));
     setSolution(fullSolution);
     setIsComplete(false);
     setIsCorrect(false);
@@ -111,7 +115,7 @@ function Sudoku() {
   }
 
   function renderCell(row, col) {
-    const initialValue = board[row][col];
+    const initialValue = initialBoard[row][col];
     const currentValue = board[row][col];
     const solutionValue = solution[row][col];
 
@@ -119,10 +123,13 @@ function Sudoku() {
       <input
         type="number"
         value={showSolution ? solutionValue : (currentValue || '')}
-        onChange={(e) => handleChange(row, col, e.target.value)}
-        min="1"
-        max="9"
-        className={`w-10 h-10 text-center border-none font-bold text-lg ${
+        onChange={(e) => {
+          const value = e.target.value;
+          if (value === '' || (value.length === 1 && /^[1-9]$/.test(value))) {
+            handleChange(row, col, value);
+          }
+        }}
+        className={`sudoku-input w-10 h-10 text-center border-none font-bold text-lg ${
           initialValue ? 'bg-gray-200' : ''
         } ${
           showSolution && currentValue !== solutionValue ? 'text-red-500' : ''

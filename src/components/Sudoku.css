@@ -1,0 +1,9 @@
+.sudoku-input::-webkit-outer-spin-button,
+.sudoku-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.sudoku-input[type=number] {
+  -moz-appearance: textfield;
+}

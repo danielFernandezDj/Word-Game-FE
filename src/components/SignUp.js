@@ -9,7 +9,7 @@ const SignUp = () => {
   const handleRegister = async () => {
     try {
       const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}users/register`, { username, email, password });
-      console.log("User registered:", response.data);
+      console.log("User registered:");
       // Optionally handle success (e.g., redirect to login page)
     } catch (error) {
       console.error("Registration failed:", error);

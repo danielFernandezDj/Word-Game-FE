@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import useSound from "use-sound";
 
 const Login = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
@@ -13,12 +14,20 @@ const Login = ({ onLoginSuccess }) => {
       const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}users/login`, { username, password });
       console.log("User logged in:", response.data);
       onLoginSuccess(response.data.user); // Call the onLoginSuccess function passed as a prop
-      navigate('/profile'); // Redirect to the profile page on successful login
+      navigate('/profile', handleSelectLogin()); // Redirect to the profile page on successful login
     } catch (error) {
       console.error("Login failed:", error.response ? error.response.data : error.message);
-      setError("Invalid username or password");
+      setError(`Invalid username or password ${handleIncorrectUser()}`);
     }
   };
+
+  // AUDIO-FX
+  const [volume, setVolume] = React.useState(0.50);
+  const [selectLoginBTN] = useSound('/audio/select-login-btn.wav');
+  const [incorrectUser] = useSound('/audio/error-planet.wav', { volume });
+
+  function handleSelectLogin() { selectLoginBTN() };
+  function handleIncorrectUser() { incorrectUser() };
 
   return (
     <section className="lg:flex lg:items-center lg:justify-center lg:h-screen | lg:-mt-16">
@@ -42,12 +51,10 @@ const Login = ({ onLoginSuccess }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button
-          onClick={handleLogin}
-          className="w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-300"
-        >
+          onClick={handleLogin} // onMouseDown={handleSelectLogin}
+          className="w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-300">
           Login
         </button>
-
         <p className="mt-4 text-center">
           Don't have an account? <a href="/signup" className="text-green-500 hover:underline">Sign Up</a>
         </p>

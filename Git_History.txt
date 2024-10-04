@@ -1,0 +1,125 @@
+* 	 (HEAD -> main, origin/main, origin/HEAD) fixin the border for small screen at spelling-bee
+* 	 savin
+*   	 Merge branch 'main' of https://github.com/tjsiv/Word-Game-FE
+|\  
+| * 	 eliminate the mt-8 ;)
+| *   	 Merge pull request #13 from tjsiv/styling-job
+| |\  
+| | * 	 add a mt-8 to the wordle title
+| * | 	 Merge pull request #12 from tjsiv/styling-job
+| |\| 
+| | * 	 fix the style-center of navBar,login & sign up btn, and add the instruction to word-le page
+| | * 	 adding the instructions to word-le
+* | | 	 Merge branch 'main' of https://github.com/tjsiv/Word-Game-FE
+|\| | 
+| * | 	 Merge pull request #11 from tjsiv/styling-job
+| |\| 
+| | * 	 new style for the Word-le
+| |/  
+| *   	 Merge pull request #10 from tjsiv/navBar-job
+| |\  
+| | * 	 Fix the login button in small screen size, and include the sticky feature
+| |/  
+| * 	 fix the mobile screen size for SpellingBee
+* | 	 ghit 'Merge branch 'main' of https://github.com/tjsiv/Word-Game-FE
+|\| 
+| *   	 Merge pull request #9 from tjsiv/styling-spellingBee
+| |\  
+| | * 	 almost finish
+| | * 	 delete the load time
+| | * 	 almost done with the styling
+| | * 	 saving some changes in the spelling game design
+| | * 	 changing buttons position
+| | * 	 styling the Spelling game
+| * |   	 Merge pull request #8 from tjsiv/html-update
+| |\ \  
+| | |/  
+| |/|   
+| | * 	 (origin/html-update, html-update) updating html and titles
+* | | 	 fixing sudoku
+|/ /  
+* | 	 adding a variable mx-2 in the footer, lines 82 & 84
+* | 	 fix the style variable at the footer from grom to grow, line 64
+|/  
+*   	 Merge pull request #6 from tjsiv/styling-the-project
+|\  
+| * 	 styling all 3 Panels + HomePage
+| * 	 (origin/styling-the-project) changin the loco and welcome style
+| * 	 styling the word-le
+* |   	 Merge pull request #7 from tjsiv/resto
+|\ \  
+| * | 	 (origin/resto, serve, resto) restoring footer
+* | | 	 Merge pull request #5 from tjsiv/serve
+|\| | 
+| * | 	 (origin/serve) fixing be serve
+|/ /  
+* |   	 Merge pull request #4 from tjsiv/wordle
+|\ \  
+| |/  
+|/|   
+| * 	 Wordle complete with word check
+* |   	 Merge pull request #3 from tjsiv/footer-job
+|\ \  
+| |/  
+|/|   
+| * 	 (origin/footer-job) create a footer
+|/  
+* 	 fixed small conflict
+*   	 Merge pull request #2 from tjsiv/working-in-home-page
+|\  
+| *   	 Merge branch 'main' into working-in-home-page
+| |\  
+| |/  
+|/|   
+* |   	 Added Sudoku, working on functionality
+|\ \  
+| * \   	 Merge pull request #1 from tjsiv/login-flow
+| |\ \  
+| | * | 	 login flow complete with sign up done also
+| |/ /  
+* / / 	 added Sudoku
+|/ /  
+* | 	 Started Spelling Bee game, added TTS, audio needs fixing
+| * 	 create the SudokuPanel.js
+| * 	 done with the spelling bee
+| * 	 finish with the wordle
+| * 	 ading more info in to the panels
+| * 	 set up the interaction with the panels
+| * 	 Create 2 .js in to the homePnel folder
+|/  
+* 	 added more base files
+* 	 adding main pages
+* 	 Front end Templates
+* 	 Delete .gitignore
+* 	 Initial commit
+* 	 (origin/ign)  updated
+* 	 updated ignore and pkg
+* 	 Wordle complete with word check
+* 	 fixed small conflict
+*   	 Merge pull request #2 from tjsiv/working-in-home-page
+|\  
+| *   	 Merge branch 'main' into working-in-home-page
+| |\  
+| |/  
+|/|   
+* |   	 Added Sudoku, working on functionality
+|\ \  
+| * \   	 Merge pull request #1 from tjsiv/login-flow
+| |\ \  
+| | * | 	 login flow complete with sign up done also
+| |/ /  
+* / / 	 added Sudoku
+|/ /  
+* | 	 Started Spelling Bee game, added TTS, audio needs fixing
+| * 	 create the SudokuPanel.js
+| * 	 done with the spelling bee
+| * 	 finish with the wordle
+| * 	 ading more info in to the panels
+| * 	 set up the interaction with the panels
+| * 	 Create 2 .js in to the homePnel folder
+|/  
+* 	 added more base files
+* 	 adding main pages
+* 	 Front end Templates
+* 	 Delete .gitignore
+* 	 Initial commit

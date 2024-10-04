@@ -11,7 +11,7 @@ const Login = ({ onLoginSuccess }) => {
   const handleLogin = async () => {
     try {
       const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}users/login`, { username, password });
-      console.log("User logged in:", response.data);
+      console.log("User logged in:");
       onLoginSuccess(response.data.user); // Call the onLoginSuccess function passed as a prop
       navigate('/profile'); // Redirect to the profile page on successful login
     } catch (error) {

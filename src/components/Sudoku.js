@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import './Sudoku.css';
 
 function Sudoku() {
   const [board, setBoard] = useState([]);
@@ -7,10 +8,10 @@ function Sudoku() {
   const [isCorrect, setIsCorrect] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
+  const [initialBoard, setInitialBoard] = useState([]);
 
   const generateSudoku = useCallback(() => {
-    const sudoku = Array(9).fill().map(() => Array(9).fill(0));
-    const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const board = Array(9).fill().map(() => Array(9).fill(0));
 
     function isValid(board, row, col, num) {
       for (let x = 0; x < 9; x++) {
@@ -18,11 +19,11 @@ function Sudoku() {
           return false;
         }
       }
-      const boxRow = Math.floor(row / 3) * 3;
-      const boxCol = Math.floor(col / 3) * 3;
+      const startRow = Math.floor(row / 3) * 3;
+      const startCol = Math.floor(col / 3) * 3;
       for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
-          if (board[boxRow + i][boxCol + j] === num) {
+          if (board[startRow + i][startCol + j] === num) {
             return false;
           }
         }
@@ -30,15 +31,14 @@ function Sudoku() {
       return true;
     }
 
-    function fillBoard(board) {
+    function solveSudoku(board) {
       for (let row = 0; row < 9; row++) {
         for (let col = 0; col < 9; col++) {
           if (board[row][col] === 0) {
-            nums.sort(() => Math.random() - 0.5);
-            for (let num of nums) {
+            for (let num = 1; num <= 9; num++) {
               if (isValid(board, row, col, num)) {
                 board[row][col] = num;
-                if (fillBoard(board)) {
+                if (solveSudoku(board)) {
                   return true;
                 }
                 board[row][col] = 0;
@@ -51,8 +51,34 @@ function Sudoku() {
       return true;
     }
 
-    fillBoard(sudoku);
-    return sudoku;
+    function fillDiagonal() {
+      for (let i = 0; i < 9; i += 3) {
+        fillBox(i, i);
+      }
+    }
+
+    function fillBox(row, col) {
+      const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+          let num;
+          do {
+            if (nums.length === 0) {
+              return false;
+            }
+            const index = Math.floor(Math.random() * nums.length);
+            num = nums[index];
+            nums.splice(index, 1);
+          } while (!isValid(board, row + i, col + j, num));
+          board[row + i][col + j] = num;
+        }
+      }
+      return true;
+    }
+
+    fillDiagonal();
+    solveSudoku(board);
+    return board;
   }, []);
 
   const createPuzzle = useCallback((fullSudoku) => {
@@ -74,6 +100,7 @@ function Sudoku() {
     const fullSolution = generateSudoku();
     const newPuzzle = createPuzzle(fullSolution);
     setBoard(newPuzzle);
+    setInitialBoard(newPuzzle.map(row => [...row]));
     setSolution(fullSolution);
   }, [generateSudoku, createPuzzle]);
 
@@ -103,6 +130,7 @@ function Sudoku() {
     const fullSolution = generateSudoku();
     const newPuzzle = createPuzzle(fullSolution);
     setBoard(newPuzzle);
+    setInitialBoard(newPuzzle.map(row => [...row]));
     setSolution(fullSolution);
     setIsComplete(false);
     setIsCorrect(false);
@@ -111,7 +139,7 @@ function Sudoku() {
   }
 
   function renderCell(row, col) {
-    const initialValue = board[row][col];
+    const initialValue = initialBoard[row][col];
     const currentValue = board[row][col];
     const solutionValue = solution[row][col];
 
@@ -119,10 +147,13 @@ function Sudoku() {
       <input
         type="number"
         value={showSolution ? solutionValue : (currentValue || '')}
-        onChange={(e) => handleChange(row, col, e.target.value)}
-        min="1"
-        max="9"
-        className={`w-10 h-10 text-center border-none font-bold text-lg ${
+        onChange={(e) => {
+          const value = e.target.value;
+          if (value === '' || (value.length === 1 && /^[1-9]$/.test(value))) {
+            handleChange(row, col, value);
+          }
+        }}
+        className={`sudoku-input w-10 h-10 text-center border-none font-bold text-lg ${
           initialValue ? 'bg-gray-200' : ''
         } ${
           showSolution && currentValue !== solutionValue ? 'text-red-500' : ''

@@ -1,125 +1,125 @@
-* 	 (HEAD -> main, origin/main, origin/HEAD) fixin the border for small screen at spelling-bee
-* 	 savin
-*   	 Merge branch 'main' of https://github.com/tjsiv/Word-Game-FE
+* 5767538 (HEAD -> main, origin/main, origin/HEAD) Removed Leaderboards, will work on later
+*   89ae6f7 Merge pull request #17 from tjsiv/style-appjs
 |\  
-| * 	 eliminate the mt-8 ;)
-| *   	 Merge pull request #13 from tjsiv/styling-job
-| |\  
-| | * 	 add a mt-8 to the wordle title
-| * | 	 Merge pull request #12 from tjsiv/styling-job
-| |\| 
-| | * 	 fix the style-center of navBar,login & sign up btn, and add the instruction to word-le page
-| | * 	 adding the instructions to word-le
-* | | 	 Merge branch 'main' of https://github.com/tjsiv/Word-Game-FE
-|\| | 
-| * | 	 Merge pull request #11 from tjsiv/styling-job
-| |\| 
-| | * 	 new style for the Word-le
-| |/  
-| *   	 Merge pull request #10 from tjsiv/navBar-job
-| |\  
-| | * 	 Fix the login button in small screen size, and include the sticky feature
-| |/  
-| * 	 fix the mobile screen size for SpellingBee
-* | 	 ghit 'Merge branch 'main' of https://github.com/tjsiv/Word-Game-FE
+| * 7034da8 add audio to Home,app.js,login,Profile. Also fix the logOut button behavior
+* | 4ac2038 Merge pull request #16 from tjsiv/style-home
 |\| 
-| *   	 Merge pull request #9 from tjsiv/styling-spellingBee
+| * a9fbb8e ading audio fx to home page
+| * e5c4aa7 adding the new planet
+* | 89c9248 merges pulled, removed outline
+* |   c373d2c Merge branch 'main' of https://github.com/tjsiv/Word-Game-FE
+|\ \  
+| * \   3169a41 Merge pull request #15 from tjsiv/conforming
+| |\ \  
+| | * \   b9d3e9b Merge branch 'main' into conforming
+| | |\ \  
+| | |/ /  
+| |/| |   
+| * | | 4ab4e98 Update README.md
+| | |/  
+| |/|   
+| * | 747c229 delete an unused import in home
+| * |   9ac1e5f Merge pull request #14 from tjsiv/styling-job
+| |\ \  
+| | * | 1f1c334 clening the home code
+| | | * 31cc43c (origin/conforming, conforming) Adding log and cleaning
+| | |/  
+* | / 4cc3653 removed outline that appears when tile is clicked
+|/ /  
+* | 34a1347 isValid function added to help with solution
+* | d13cad5 removed scrolling from tiles, added function to edit answers
+|/  
+* ef57fc5 fixin the border for small screen at spelling-bee
+* 92f4a2e savin
+*   5eb00fa Merge branch 'main' of https://github.com/tjsiv/Word-Game-FE
+|\  
+| * c0eb68b eliminate the mt-8 ;)
+| *   5a0a532 Merge pull request #13 from tjsiv/styling-job
 | |\  
-| | * 	 almost finish
-| | * 	 delete the load time
-| | * 	 almost done with the styling
-| | * 	 saving some changes in the spelling game design
-| | * 	 changing buttons position
-| | * 	 styling the Spelling game
-| * |   	 Merge pull request #8 from tjsiv/html-update
+| | * 0cf2c92 add a mt-8 to the wordle title
+| * | b590789 Merge pull request #12 from tjsiv/styling-job
+| |\| 
+| | * 905df89 fix the style-center of navBar,login & sign up btn, and add the instruction to word-le page
+| | * d9e6fb4 adding the instructions to word-le
+* | | 53efe5f Merge branch 'main' of https://github.com/tjsiv/Word-Game-FE
+|\| | 
+| * | b398895 Merge pull request #11 from tjsiv/styling-job
+| |\| 
+| | * b89566c new style for the Word-le
+| |/  
+| *   3ee71df Merge pull request #10 from tjsiv/navBar-job
+| |\  
+| | * 0c78820 Fix the login button in small screen size, and include the sticky feature
+| |/  
+| * bf3d5dd fix the mobile screen size for SpellingBee
+* | 067fee0 ghit 'Merge branch 'main' of https://github.com/tjsiv/Word-Game-FE
+|\| 
+| *   3c6179e Merge pull request #9 from tjsiv/styling-spellingBee
+| |\  
+| | * c3c0c96 almost finish
+| | * 53fbd8e delete the load time
+| | * eeacb6c almost done with the styling
+| | * d7ea6f0 saving some changes in the spelling game design
+| | * c9b946d changing buttons position
+| | * 96bf33f styling the Spelling game
+| * |   9861886 Merge pull request #8 from tjsiv/html-update
 | |\ \  
 | | |/  
 | |/|   
-| | * 	 (origin/html-update, html-update) updating html and titles
-* | | 	 fixing sudoku
+| | * 053dcaa (origin/html-update, html-update) updating html and titles
+* | | 65e7698 fixing sudoku
 |/ /  
-* | 	 adding a variable mx-2 in the footer, lines 82 & 84
-* | 	 fix the style variable at the footer from grom to grow, line 64
+* | fb2f685 adding a variable mx-2 in the footer, lines 82 & 84
+* | 1175794 fix the style variable at the footer from grom to grow, line 64
 |/  
-*   	 Merge pull request #6 from tjsiv/styling-the-project
+*   e3d4d53 Merge pull request #6 from tjsiv/styling-the-project
 |\  
-| * 	 styling all 3 Panels + HomePage
-| * 	 (origin/styling-the-project) changin the loco and welcome style
-| * 	 styling the word-le
-* |   	 Merge pull request #7 from tjsiv/resto
+| * 7e00e56 styling all 3 Panels + HomePage
+| * f02ca19 (origin/styling-the-project) changin the loco and welcome style
+| * 99dc3be styling the word-le
+* |   c631dfe Merge pull request #7 from tjsiv/resto
 |\ \  
-| * | 	 (origin/resto, serve, resto) restoring footer
-* | | 	 Merge pull request #5 from tjsiv/serve
+| * | 5392fd4 (origin/resto, serve, resto) restoring footer
+* | | 44b3f0a Merge pull request #5 from tjsiv/serve
 |\| | 
-| * | 	 (origin/serve) fixing be serve
+| * | 7b0275f (origin/serve) fixing be serve
 |/ /  
-* |   	 Merge pull request #4 from tjsiv/wordle
+* |   2da4652 Merge pull request #4 from tjsiv/wordle
 |\ \  
 | |/  
 |/|   
-| * 	 Wordle complete with word check
-* |   	 Merge pull request #3 from tjsiv/footer-job
+| * 9d07b93 Wordle complete with word check
+* |   f721115 Merge pull request #3 from tjsiv/footer-job
 |\ \  
 | |/  
 |/|   
-| * 	 (origin/footer-job) create a footer
+| * eb6277b (origin/footer-job) create a footer
 |/  
-* 	 fixed small conflict
-*   	 Merge pull request #2 from tjsiv/working-in-home-page
+* 42e3519 fixed small conflict
+*   6b20448 Merge pull request #2 from tjsiv/working-in-home-page
 |\  
-| *   	 Merge branch 'main' into working-in-home-page
+| *   51dfe30 Merge branch 'main' into working-in-home-page
 | |\  
 | |/  
 |/|   
-* |   	 Added Sudoku, working on functionality
+* |   49cfa95 Added Sudoku, working on functionality
 |\ \  
-| * \   	 Merge pull request #1 from tjsiv/login-flow
+| * \   85d82e7 Merge pull request #1 from tjsiv/login-flow
 | |\ \  
-| | * | 	 login flow complete with sign up done also
+| | * | 27ba2ed login flow complete with sign up done also
 | |/ /  
-* / / 	 added Sudoku
+* / / 292e09a added Sudoku
 |/ /  
-* | 	 Started Spelling Bee game, added TTS, audio needs fixing
-| * 	 create the SudokuPanel.js
-| * 	 done with the spelling bee
-| * 	 finish with the wordle
-| * 	 ading more info in to the panels
-| * 	 set up the interaction with the panels
-| * 	 Create 2 .js in to the homePnel folder
+* | 01bb5f1 Started Spelling Bee game, added TTS, audio needs fixing
+| * d9a1c07 create the SudokuPanel.js
+| * 1be9017 done with the spelling bee
+| * f7118ba finish with the wordle
+| * 38272b8 ading more info in to the panels
+| * bf53531 set up the interaction with the panels
+| * ad211da Create 2 .js in to the homePnel folder
 |/  
-* 	 added more base files
-* 	 adding main pages
-* 	 Front end Templates
-* 	 Delete .gitignore
-* 	 Initial commit
-* 	 (origin/ign)  updated
-* 	 updated ignore and pkg
-* 	 Wordle complete with word check
-* 	 fixed small conflict
-*   	 Merge pull request #2 from tjsiv/working-in-home-page
-|\  
-| *   	 Merge branch 'main' into working-in-home-page
-| |\  
-| |/  
-|/|   
-* |   	 Added Sudoku, working on functionality
-|\ \  
-| * \   	 Merge pull request #1 from tjsiv/login-flow
-| |\ \  
-| | * | 	 login flow complete with sign up done also
-| |/ /  
-* / / 	 added Sudoku
-|/ /  
-* | 	 Started Spelling Bee game, added TTS, audio needs fixing
-| * 	 create the SudokuPanel.js
-| * 	 done with the spelling bee
-| * 	 finish with the wordle
-| * 	 ading more info in to the panels
-| * 	 set up the interaction with the panels
-| * 	 Create 2 .js in to the homePnel folder
-|/  
-* 	 added more base files
-* 	 adding main pages
-* 	 Front end Templates
-* 	 Delete .gitignore
-* 	 Initial commit
+* d8afacd added more base files
+* a9841c5 adding main pages
+* bdb3900 Front end Templates
+* 9e16d9d Delete .gitignore
+* 1d07319 Initial commit

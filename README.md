@@ -133,3 +133,11 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Acknowledgements
+This Sudoku game impmentation was based on the tutorial video "Build a Sudoku Game with React" by Barry Michael Doyle. The video provided the framework for the table and functions. 
+
+## Reference 
+- **Title:** Build a Sudoku Game with React
+- **Author:** Barry Michael Doyle
+- **Link:** [https://www.youtube.com/watch?v=4hPQsYWlYLg](https://www.youtube.com/watch?v=4hPQsYWlYLg)

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function SpellingBee() {
   const [word, setWord] = useState('');
@@ -114,7 +114,8 @@ function SpellingBee() {
         setFeedback('Failed to record score. Please try again.');
       }
     } else {
-      setFeedback('Sign up to save your score and compete on the leaderboard!');
+      setFeedback('Thank you for playing! Click on the button below to start a new game. ');
+      
     }
   };
 
@@ -168,8 +169,16 @@ function SpellingBee() {
     setHearts(['❤️', '❤️', '❤️', '❤️', '❤️']);
     setCorrectGuesses(0);
     setIsGameOver(false);
-    fetchNewWord();
-    setIsSubmitDisabled(false)
+    setFeedback('Thank you for playing! Click on the button below to start a new game.');
+    
+    const feedbackTimeout = setTimeout(() => {
+      setFeedback('');
+      fetchNewWord();
+      setIsSubmitDisabled(false);
+    }, 5000); // 5000 milliseconds = 5 seconds
+  
+    // Clear the timeout if the component unmounts
+    return () => clearTimeout(feedbackTimeout);
   };
 
   const toggleInstructions = (e) => {
@@ -286,14 +295,17 @@ function SpellingBee() {
       {/* <p>Correct Guesses: {correctGuesses}</p> */}
       {isGameOver && (
         <div>
-          <button style={buttonStyle} onClick={handleNewGame}>New Game</button>
+           
+          <button className="rounded-lg w-full bg-yellow-400 tracking-wider py-2 text-bold text-black" style={buttonStyle} onClick={handleNewGame}>New Game</button>
           {!user && (
             <div>
-              <p>Sign up to save your score and compete on the leaderboard!</p>
-              <Link to="/signup" style={buttonStyle}>Sign Up</Link>
+              
+              
             </div>
+            
+            
           )}
-          <button style={buttonStyle} onClick={() => navigate('/leaderboard')}>View Leaderboard</button>
+          
         </div>
       )}
       <button onClick={toggleInstructions} className="m-4 text-2xl font-bold text-indigo-400

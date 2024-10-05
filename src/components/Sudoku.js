@@ -83,7 +83,7 @@ function Sudoku() {
 
   const createPuzzle = useCallback((fullSudoku) => {
     const puzzle = fullSudoku.map(row => [...row]);
-    const numToRemove = 40; // Adjust this number to change difficulty
+    const numToRemove = 40; // Adjust this number to change difficulty Max = 81
     let removed = 0;
     while (removed < numToRemove) {
       const row = Math.floor(Math.random() * 9);
@@ -104,7 +104,7 @@ function Sudoku() {
     setSolution(fullSolution);
   }, [generateSudoku, createPuzzle]);
 
-  const checkCompletion = useCallback(() => {
+  const checkCompletion = useCallback(() => { //memoization explanation https://www.youtube.com/watch?v=a7EjmdQzPqY&ab_channel=CoreySchafer
     const isFilled = board.every(row => row.every(cell => cell !== 0));
     setIsComplete(isFilled);
     setIsCorrect(JSON.stringify(board) === JSON.stringify(solution));

@@ -14,6 +14,7 @@ You can view a live demo of the application at [Demo Link](https://word-world-be
   - Axios
   - React Router
   - Tailwind CSS (for styling)
+  - - Freedictionary api [Link](https://dictionaryapi.dev/)
   
 - **Backend**: 
   - Node.js

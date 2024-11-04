@@ -6,7 +6,7 @@ Sudoku is a logic-based number-placement puzzle. The objective is to fill a 9×9
 Spelling Bee is a word game that involves listening to a word being said and then trying to guess the word. Guessing the word correctly earns the player points and adds them to their total score.
 
 ## Demo
-You can view a live demo of the application at [Demo Link](https://word-world-be.onrender.com/) 
+You can view a live demo of the application at [Demo Link](https://word-game-be.onrender.com/) 
 
 ## Technologies
 - **Frontend**: 
